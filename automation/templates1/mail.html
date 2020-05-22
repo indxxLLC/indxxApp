@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar Automation</title>
+</head>
+<body>
+<h1>Email testing for Calendar</h1>
+<div style="margin-top: 47px;" class="mainContainer" >
+
+	<table border="1">
+	<thead>
+	  <tr>
+        <th>Index Name</th>
+        <th>Client Name</th>
+        <th>Action</th>
+        <th>Index Type</th>
+        <th>Date Type</th>
+        <th>Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for ind in info %}
+    {% if ind.Effective_Date_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Effective date</td>
+        <td>{{ ind.Effective_Date_rec }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Selection_Date_Cycle_1_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Selection Date-Cycle1</td>
+        <td>{{ ind.Selection_Date_Cycle_1_rec }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Completion_Date_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Completion date</td>
+        <td>{{ ind.Completion_Date_rec }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Ind_Cmte_Comm_Date_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Index Committee communication date</td>
+        <td>{{ ind.Ind_Cmte_Comm_Date_rec }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Weights_Share_Freeze_Date_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Freeze date</td>
+        <td>{{ ind.Weights_Share_Freeze_Date_rec }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Selection_Date_Cycle_2_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Selection date-Cycle2</td>
+        <td>{{ ind.Selection_Date_Cycle_2_rec }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Prelim_Comm_Date_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Preliminary communication date</td>
+        <td>{{ ind.Prelim_Comm_Date_rec }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Public_Announcement_Date_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Public announcement date</td>
+        <td>{{ ind.Public_Announcement_Date_rec }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Client_Comm_Date_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Client communication date</td>
+        <td>{{ ind.Client_Comm_Date_rec }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Client_Comm_Date_rec %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Reconstitution</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Communication to calculation agent</td>
+        <td>{{ ind.Client_Comm_Date_rec}}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Effective_Date_re %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Rebalance</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Effective date</td>
+        <td>{{ ind.Effective_Date_re }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Weights_Share_Freeze_Date_re %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Rebalance</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Freeze date</td>
+        <td>{{ ind.Weights_Share_Freeze_Date_re }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Public_Announcement_Date_re %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Rebalance</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Public Announcement date</td>
+        <td>{{ ind.Public_Announcement_Date_re }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Client_Comm_Date_re %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Rebalance</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Client Communication date</td>
+        <td>{{ ind.Client_Comm_Date_re }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Client_Comm_Date_re %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Rebalance</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Communication to calculation agent</td>
+        <td>{{ ind.Client_Comm_Date_re }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Effective_Date_rev %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Review</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Effective date</td>
+        <td>{{ ind.Effective_Date_rev }}</td>
+    </tr>
+    {% endif %}
+
+    {% if ind.Ind_Cmte_Comm_Date_rev %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Review</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Index Committee communication date</td>
+        <td>{{ ind.Ind_Cmte_Comm_Date_rev }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Weights_Share_Freeze_Date_rev %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Review</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Freeze date</td>
+        <td>{{ ind.Weights_Share_Freeze_Date_rev }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Selection_Date_Cycle_2_rev %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Review</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Selection date-Cycle2</td>
+        <td>{{ ind.Selection_Date_Cycle_2_rev }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Prelim_Comm_Date_rev %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Review</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Preliminary communication date</td>
+        <td>{{ ind.Prelim_Comm_Date_rev }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Public_Announcement_Date_rev %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Review</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Public announcement date</td>
+        <td>{{ ind.Public_Announcement_Date_rev }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Client_Comm_Date_rev %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Review</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Client communication date</td>
+        <td>{{ ind.Client_Comm_Date_rev }}</td>
+    </tr>
+    {% endif %}
+    {% if ind.Client_Comm_Date_rev %}
+    <tr>
+        <td>{{ ind.Index_Name }}</td>
+        {% for client in client_name %}
+		{% if ind.Client_Name_id|slugify == client.code %}
+		<td>{{ client.description }}</td>
+		{% endif %}
+		{% endfor %}
+        <td>Review</td>
+        <td>{{ ind.Type_of_Ind }}</td>
+        <td>Communication to calculation agent</td>
+        <td>{{ ind.Client_Comm_Date_rev }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </tbody>
+	</table>
+
+
+</div>
+</body>
+</html>

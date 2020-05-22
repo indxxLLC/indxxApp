@@ -1,0 +1,31 @@
+
+
+changed lines : 505,542
+to be added lines : 599, 622
+
+1.Organise the functions and clean up unnecessary scripts.
+
+2. calendar update 
+
+3. complete the reload function with periodic divisor.
+
+4.no need to save Tr values now..just run the code for all the dates and get the exposures.
+
+5.can we write a loop from 485 -500.
+
+6.there is function BT_Weights_CSV this creates a csv which we can use in backtest engine...we need to 
+add two more columns to the csv file start date and end date. get in touch with Poonam 
+for the exact format of this.
+
+GO live tasks:
+
+1.Periodic divisor export function creation.
+
+2.there is another function WEIGHTS_CSV which generates csv in the same format as our 
+ical engine for daily calculations.This should create the file properly and mail it 
+to indxx ops team on month end dates. 
+
+3.To check error function functionality 
+
+4.make a handover of the index
+  

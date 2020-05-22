@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block title %}Index List{% endblock %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+  overflow: hidden;
+   
+}
+
+.dropdown-content {
+margin-top:30px;
+
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100000000;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+<div class="topnav">
+	
+	<a class="active" href = "#">Equal Weight</a>
+	<!--<a href="{% url 'ulcapweight' %}">Upper cap and Lower cap</a>-->
+	<a href = "{% url 'ulcapagweight' %}">Upper/Lower Cap And Aggregate</a>
+	<div class="dropdown">
+	<a class="dropbtn">Dropdown 
+      <i class="fa fa-caret-down"></i>
+    </a>
+	 <div class="dropdown-content">
+		<a href="#">Link 1</a>
+		<a href="#">Link 2</a>
+		<a href="#">Link 3</a>
+	  </div>
+	  </div>
+	<a href = "{% url 'uprcapweight' %}"> Global Generics/USA e-commerce</a>
+	<a href = "{% url 'ultopremainsecu' %}"> Global Fintech/Robotics And AI</a>
+	<!--<a onclick = "removeid()">About</a>-->
+	<div class="topnav-right">
+	<!--<a href="{% url 'back' %}">Back</a>-->
+	<a href="#">Hi </a>
+	<a href="#">Logout</a>
+	</div>
+</div>
+<div id = "elementID">
+
+<div class="mainContainer">
+<div class="gridDiv">
+<table class="table table-striped" id = "testTable">
+	<label class="label-heading">Equal Weight</label>	
+	<tbody>
+	<form id="WCForm" name="WCForm" action="{% url 'equalweightpost' %}"  method="post" role="form" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="row">
+
+		<div class="column"> 
+		<label>Upload File <span>*</span></label><br>
+		<input type="file" name="upload_file" id="upload_file" accept=".csv" required><br/>
+		</div>
+		
+		<div class="column"> 
+		<label></label><br>
+		<div onclick="weight_validation()" class="nextback">Weight Calculate</div>
+		</div>
+	</div>
+	
+	</form>
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

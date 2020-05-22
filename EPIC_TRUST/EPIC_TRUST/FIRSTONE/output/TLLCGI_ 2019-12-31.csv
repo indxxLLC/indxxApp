@@ -1,0 +1,6 @@
+code,ticker,isin,name,curr,divcurr,sedol,cusip,countryname,sector,industry,subindustry,share,weight
+ABCDE,SPY US EQUITY,US78462F1030,SPDR S&P 500 ETF,USD,USD,,,United States,,,,,20.0000000000%
+ABCDE,SPYG US EQUITY,US78464A4094,SPDR S&P 500 Growth ETF,USD,USD,,,United States,,,,,60.0000000000%
+ABCDE,SLYG US EQUITY,US78464A2015,S&P 600 Small Cap Growth ETF,USD,USD,,,United States,,,,,10.0000000000%
+ABCDE,IWF US EQUITY,US4642876142,iShares Russell 1000 Growth ETF,USD,USD,,,United States,,,,,10.0000000000%
+ABCDE,SHY US EQUITY,US4642874576,iShares 1-3 Year Treasury Bond ETF,USD,USD,,,United States,,,,,0.0000000000%

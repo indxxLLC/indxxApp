@@ -1,0 +1,62 @@
+<!-- templates/index.html -->
+ <!--
+ * Version : 1.0
+ * Project: Weight Calculation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Created Date: 23-08-2019
+ * Modified Date: dd-mm-yyyy
+ * Licensed under : Self
+ --->
+{% extends 'base.html' %}
+{% block title %}Index List{% endblock %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="topnav">
+
+	<a class="active" href = "#">Weight List</a>
+	<a href="#">Weight Calculation</a>
+	<a href = "#">Weight Generation</a>
+	<!--<a onclick = "removeid()">About</a>-->
+	<div class="topnav-right">
+	
+	<a href="#">Hi ,</a>
+	<a href="#">Logout</a>
+	</div>
+</div>
+<div id = "elementID">
+
+	<div class="mainContainer">
+	<div class="gridDiv">
+	<table class="table table-striped" id = "testTable">
+		<thead>
+		  <tr bgcolor="#D3D3D3">
+			<th>Index Name</th>
+			<th>Client Name</th>
+			<th>Contract Type</th>
+			<th>Type of Index</th>
+			<th>Index Style</th>
+			<th>Calculation Agent</th>
+			<th>Reconstitution</th>
+			<th>Rebalance</th>
+			<th>Review</th>
+			<th colspan="3"><center>Actions<center></th>
+		  </tr>
+		</thead>
+
+	</table>
+	</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+

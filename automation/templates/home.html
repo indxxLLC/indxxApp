@@ -1,0 +1,65 @@
+<!-- templates/home.html -->
+ <!--
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Created Date: 08-04-2019
+ * Modified Date: dd-mm-yyyy
+ * Licensed under : Self
+ --->
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{% load static %}
+
+
+	<div id = "elementID" >
+	<div class="topnav" style="margin-top:-55px;" >
+	
+		<div class="topnav-right">
+		<a href="#">Hi {{ user.username|capfirst }},</a>
+		<a href="{% url 'logout' %}">Logout</a>
+		</div>
+		</div>
+	
+	
+	</div>
+	<div class="row">
+	<div class="cal_column">
+	<form action="{% url 'index' %}" method="post">
+	<h1><img src = "{% static 'images/Calender.jpg' %}" width = "70%" height = "200px"></h1>
+	<input type="submit" id="btn_calendar" name="submit" value="Calendar Automation" >
+	</form>
+	</div>
+	<div class="cal_column">
+	<!--<form action="{% url 'report' %}" method="post">
+	<h1><img src = "{% static 'images/weight_calc.jpg' %}" width = "70%" height = "200px"></h1>
+	<input type="submit" id="btn_calendar" name="submit" value="Weight Calculation" >
+	</form>-->
+	</div>
+	<div class="cal_column">
+
+	</div>
+	<div class="cal_column">
+
+	</div>
+	</div>
+	
+
+	</div>
+
+{% else %}
+	<div id ="elementID" >
+	<div class="row">
+
+		<div class="cal_column">
+		<p>You are not logged in</p>
+		<a href="{% url 'login' %}">login</a>
+		</div>
+	</div>
+	</div>
+{% endif %}
+{% endblock %}

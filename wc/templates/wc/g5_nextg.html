@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block title %}Index List{% endblock %}
+{% load static %}
+{% block content %}
+<div class="leftMenu">
+   	<div class="leftMenu-item">
+	<div class="col-12">
+
+		<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+		<a class="menus" href="{% url 'equalweight' %}" >Equal Weight</a>
+		<a class="menus" href="{% url 'ulcapagweight' %}" >Upper/Lower Cap And Aggregate</a>
+		<div class="dropdown">
+			<div class="dropbtn">Customized Weight</div>
+			<div class="dropdown-content">
+				<div class="scroll">
+					<table>
+						<a class="menus" href="{% url 'aibigdata' %}">AI & Big Data</a>
+						<a class="menus" href="{% url 'blockchain' %}">Blockchain</a>
+						<a class="menus" href="{% url 'climatechange' %}">Climate Change </a>
+						<a class="menus" href="{% url 'ecomm' %}">E-Commerce </a>
+						<a class="menus" href="{% url 'foodtech' %}">Food Technology </a>
+						<a class="menus" href="{% url 'globalaerospace' %}">Global Aerospace & Defense</a>
+						<a class="menus" href="{% url 'globalcloudcomputing' %}">Global Cloud Computing</a>
+						<a class="menus" href="{% url 'globalecomm' %}">Global E-Commerce</a>
+						<a class="menus" href="{% url 'uprcapweight' %}" >Global Generics/USA e-commerce</a>
+						<a class="menus" href="{% url 'globaliot' %}">Global Internet Of Things </a>
+						<a class="menus" href="{% url 'globaljuniorcloudcomputing' %}"> Global Junior Cloud Computing </a>
+						<a class="menus" href="{% url 'globalspace' %}">Global Space Thematic</a>
+						<a class="menus" href="{% url 'globalwearablesiot' %}">Global Wearables And IOT </a>
+						<a class="menus" href="{% url 'globalyieldco'%}">Global Yieldco</a>
+						<a class="menus" href="{% url 'healthcareinnovation' %}">HealthCare Innovation</a>
+						<a class="menus" href="{% url 'hylvpreferred' %}">HYLV Preferred</a>
+						<a class="menus" href="{% url 'northamericancannabis' %}">North America Cannabis</a>
+						<a class="menus" href="{% url 'oldagenursing' %}">Old Age RIETs </a>
+						<a class="menus" href="{% url 'uspoliwogg'%}">Poliwogg US HealthCare</a>
+						<a class="menus" href="{% url 'privatecredit' %}">Private Credit</a>
+						<a class="menus" href="{% url 'qualitygoldminers'%}">Quality Gold Miners</a>
+						<a class="menus" href="{% url 'mlp' %}">Real Asset Income</a>
+						<a class="menus" href="{% url 'reitmaster'%}">REIT Master</a>
+						<a class="menus" href="{% url 'reitpreferred'%}">REIT Preferred Stock</a>
+						<a class="dropdown-btn">SuperDividend Alternative Index<i class="fa fa-caret-down"></i></a>
+						<div class="dropdown-container">
+						  <li><a class="menus" href="{% url 'superdividendprimary' %}">SuperDividend Primary</a></li>
+						  <li><a class="menus" href="{% url 'superdividendsecondary' %}">SuperDividend Secondary</a></li>
+						</div>	
+						<a class="menus" href="{% url 'mlpsector' %}">SuperDividend US Low Volatility</a>
+						<a class="menus" href="{% url 'ussharing' %}">US Sharing Economy</a>
+						<a class="menus" href="{% url 'usindustrialrealestatelogistics' %}">US Industrial Real Estate</a>
+						<a class="menus" href="{% url 'usjuniorcloudcomputingexpo' %}">US Junior Cloud Computing </a>
+						<a class="menus" href="{% url 'ushighbetalow'%}">US High Beta Low Volatility</a>
+						<a class="menus" href="{% url 'usecomm' %}"> US E-Commerce </a>
+						<a class="menus" href="{% url 'yieldcorenewable'%}">Yieldco & Renewable Energy</a>
+						<a class="active" href="{% url 'g5nextg' %}">5G & NextG Thematic</a>
+					</table>
+				</div>
+			</div>
+			</div>
+	   </div>
+	</div>
+	</div>
+</div>
+<div class= "rightArea">
+<div class="download">
+<i class="fa fa-info-circle" style="font-size:24px"><span class="tooltiptext">Mandatory required column(s) would be in upload-file: <br/>ISIN, MCAP and Theme</span></i>
+Sample File : <a href="{% url 'downloadcsv' %}" download="weight_calc.csv"><button class="downBtn">Download</button></a>
+</div>
+	<div class="gridDiv">
+	<table class="table table-striped" id = "testTable">
+	<label class="label-heading">5G & NextG Thematic Index</label>	
+	<tbody>
+	<form id="WCForm" name="WCForm" action="{% url 'g5nextgpost' %}"  method="post" role="form" enctype="multipart/form-data">
+	{% csrf_token %}
+	
+	<div class="row">
+
+		<div class="column"> 
+		<label>Aggregate weight of 5G Infrastructure & Hardware (%)<span>*</span></label><br>
+		<input type="text" name="agg_weight" id="agg_weight" onkeypress="return isNumberKey(event)"  placeholder="Enter only integer value."><br/>
+		(For Telecommunications Service Providers weight = 100- weight of 5G Infrastructure & Hardware)
+		</div>
+		
+		<div class="column"> 
+		<label>Market Capitalization (million USD)<span>*</span></label><br>
+		<input type="text" name="mcap_cap" id="mcap_cap" onkeypress="return isNumberKey(event)"  placeholder="Enter only integer value."><br/>
+		</div>
+		
+		<div class="column"> 
+		<label>Upload File <span>*</span></label><br>
+		<input type="file" name="upload_file" id="upload_file" accept=".csv" required><br/>
+		<span style="color:red">
+		{% if message %}
+			{{ message }}
+		{% endif %}
+		</span>
+		</div>
+		
+		<div class="column"> 
+		<label></label><br>
+		<div onclick="nextg_thematic_validation()" class="nextback">Weight Calculate</div>
+		</div>
+	</div>
+	
+	</form>
+	</tbody>
+	</table>
+	</div>
+</div>
+
+{% endblock %}

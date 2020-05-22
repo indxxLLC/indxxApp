@@ -1,0 +1,289 @@
+<!-- templates/report.html -->
+ <!--
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Created Date: 08-04-2019
+ * Modified Date: dd-mm-yyyy
+ * Licensed under : Self
+ --->
+
+{% extends 'base.html' %}
+{% block title %}Index Report{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+	{% load static %}
+
+	<div class="topnav">
+	<a href = "{% url 'index' %}">Index List</a>
+	<a href="{% url 'addindex' %}">Index Registration</a>
+	<a class="active" href = "{% url 'report' %}">Report Generation</a>
+	<!--<a onclick = "removeid()">About</a>-->
+	<div class="topnav-right">
+	<!--<a href="{% url 'back' %}">Back</a>   max="{{ curr_year }}-12" -->
+	<a href="#">Hi {{ user.username|capfirst }},</a>
+	<a href="{% url 'logout' %}">Logout</a>
+	</div>
+
+	</div>
+
+	<div id = "elementID">
+	<form action="{% url 'reportgenerate' %}" method="post">
+	{% csrf_token %}
+	<div class="row" id = "element1">
+	<div class="column1">
+	<label>Index Name</label><br>
+	<input type="text" name="Index_Name" {%  if index_name != "" %} value = {{ index_name }} {% endif %} id="Index_Name" placeholder="Index Name">
+	<br>
+	<label>Client Name</label><br> 
+	<select name="Client_Code" id="Client_Code">
+		<option value="">Select Any One</option>
+		{% for client in client_name %}
+			<option {% if client_code == client.code %} selected {% endif %} value = {{ client.code }} >{{ client.description }}</option>
+		{% endfor %}
+	</select>
+	
+	</div>
+	
+	<div class="column1">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" checked name = "radiobutton" {% if sel_type1 == "effective" %} checked {% endif %} value="effective"> : <label>Effective Date</label>
+
+
+		<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name = "radiobutton" {% if sel_type1 == "reb" %} checked {% endif %} value="reb"> : <label>Rebalancing</label>
+		<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>From Date-----</label>
+	<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="month"   name = "month1" id="month1" {% if from_MY != '' %} value = {{ from_MY }} {% endif %}>
+	<br>
+	</div>
+	<div class="column1">
+	<input type="radio" name = "radiobutton" {% if sel_type1 == "reco" %} checked {% endif %} value="reco"> : <label>Reconstitution</label>
+	<br>
+	<input type="radio" name = "radiobutton" {% if sel_type1 == "rev" %} checked {% endif %} value="rev"> : <label>Review</label>
+
+	<br>
+	<label>To Date-----</label>  <br>
+	<input type="month" name = "month2" id="month2" onblur="datevalidation('month1',this)" {% if to_MY != '' %} value = {{ to_MY }} {% endif %}>
+	</div>
+	<div class="column1">
+
+	<input type="submit" id = "btn_report" value="Generate Report"><br><br>
+	<input type=button value="Export" onclick="tableToExcel('testTable', 'Sheet1')"><br><br>
+	<a href="{% url 'report' %}"><input type=button value="Reset" ></a>
+	<!--<a href="{% url 'export_xlsx' %}"><input type=button value="Download" onclick="tableToExcel('testTable', 'Example Table')"></a>-->
+	</div>
+
+	</div>
+	</form>
+
+	<div style="margin-top: -47px;" class="mainContainer" >
+	<div class="gridDiv">
+	{% if info %}
+	<table class="table table-bordered" id = "testTable" style="table-layout: auto; width: 100%;">
+	<thead class="table-dark" style="font-size: 13px;">
+	  <tr bgcolor="#333">
+		<th>Index Name</th>
+		<th>Client Name</th>
+		<th style="display:none;">Contract Type</th>
+		<th style="display:none;">Type of Index</th>
+		<th style="display:none;">Index Style</th>
+		<th style="display:none;">Calculation Agent</th>
+		<th style="display:none;">Reconstitution</th>
+		<th style="display:none;">Rebalance</th>
+		<th style="display:none;">Review</th>
+        <th>Action</th>
+		<th>Selection date-1</th>
+		<th>Completion date-1</th>
+		<th>Selection Date-2</th>
+		<!--<th>Index Committee Communication Date</th>-->
+		<th>Preliminary Communication Date</th>
+		<th>Weights Freeze Date</th>
+		<th>QC Date</th>
+		<th>Public Announcement Date</th>
+		<th>Client Communication Date</th>
+		<th>Communication to Calculation Agent</th>
+		<th>Effective Date</th>
+	  </tr>
+	</thead>
+	 <tbody style="font-size: 13px;">
+
+		{% for ind in info %}
+		{% if ind.Effective_Date_rec %}
+			<tr>
+				<td style="background:#D3D3D3;">{{ ind.Index_Name  }}</td>
+				{% for client in client_name %}
+					{% if ind.Client_Name_id|slugify == client.code %}
+						<td>{{ client.description }}</td>
+					{% endif %}
+				{% endfor %}
+				<td style="display:none;">{{ ind.Contract_Type }}</td>
+				<td style="display:none;">{{ ind.Type_of_Ind }}</td>
+				<td style="display:none;">{{ ind.Ind_Sty }}</td>
+				<td style="display:none;">{{ ind.Calc_Agent }}</td>
+				<td style="display:none;">{{ ind.Reconstitution }}</td>
+				<td style="display:none;">{{ ind.Rebalance }}</td>
+				<td style="display:none;">{{ ind.Review }}</td>
+                <td style="background:#DCDCDC;">Reconstitution</td>
+
+				<td>{{ ind.Selection_Date_Cycle_1_rec }}</td>
+				<td style="background:#DCDCDC;">{{ ind.Completion_Date_rec }}</td>
+				<td>{{ ind.Selection_Date_Cycle_2_rec }}</td>
+
+				<!--<td style="background:#DCDCDC;;">{{ ind.Ind_Cmte_Comm_Date_rec }}</td>-->
+
+				<td  style="background:#DCDCDC;">{{ ind.Prelim_Comm_Date_rec }}</td>
+
+				<td>{{ ind.Weights_Share_Freeze_Date_rec }}</td>
+
+				<td style="background:#DCDCDC;">{{ ind.QC_Date_rec }}</td>
+
+				<td>{{ ind.Public_Announcement_Date_rec }}</td>
+
+				<td style="background:#DCDCDC;">{{ ind.Client_Comm_Date_rec }}</td>
+				<td>{{ ind.Comm_cal_Date_rec }}</td>
+				<td style="background:#DCDCDC;">{{ ind.Effective_Date_rec }}</td>
+			</tr>
+		{% endif %}
+		{% if ind.Effective_Date_re %}
+        <tr>
+			<td style="background:#D3D3D3;">{{ ind.Index_Name  }}</td>
+				{% for client in client_name %}
+					{% if ind.Client_Name_id|slugify == client.code %}
+						<td>{{ client.description }}</td>
+					{% endif %}
+				{% endfor %}
+				<td style="display:none;">{{ ind.Contract_Type }}</td>
+				<td style="display:none;">{{ ind.Type_of_Ind }}</td>
+				<td style="display:none;">{{ ind.Ind_Sty }}</td>
+				<td style="display:none;">{{ ind.Calc_Agent }}</td>
+				<td style="display:none;">{{ ind.Reconstitution }}</td>
+				<td style="display:none;">{{ ind.Rebalance }}</td>
+				<td style="display:none;">{{ ind.Review }}</td>
+            <td style="background:#DCDCDC;" >Rebalance</td>
+            <td>{{ ind.Selection_Date_Cycle_1_re }}</td>
+            <td style="background:#DCDCDC;">{{ ind.Completion_Date_re }}</td>
+            <td>{{ ind.Selection_Date_Cycle_2_re }}</td>
+            <!--<td style="background:#DCDCDC;">{{ ind.Ind_Cmte_Comm_Date_re }}</td>-->
+            <td style="background:#DCDCDC;">{{ ind.Prelim_Comm_Date_re }}</td>
+
+			<td>{{ ind.Weights_Share_Freeze_Date_re }}</td>
+
+			<td style="background:#DCDCDC;">{{ ind.QC_Date_re }}</td>
+
+			<td>{{ ind.Public_Announcement_Date_re }}</td>
+
+			<td style="background:#DCDCDC;">{{ ind.Client_Comm_Date_re }}</td>
+
+            <td>{{ ind.Comm_cal_Date_re }}</td>
+
+			<td style="background:#DCDCDC;">{{ ind.Effective_Date_re }}</td>
+
+        </tr>
+		{% endif %}
+		{% if ind.Effective_Date_rev %}
+        <tr>
+			<td style="background:#D3D3D3;">{{ ind.Index_Name  }}</td>
+				{% for client in client_name %}
+					{% if ind.Client_Name_id|slugify == client.code %}
+						<td>{{ client.description }}</td>
+					{% endif %}
+				{% endfor %}
+				<td style="display:none;">{{ ind.Contract_Type }}</td>
+				<td style="display:none;">{{ ind.Type_of_Ind }}</td>
+				<td style="display:none;">{{ ind.Ind_Sty }}</td>
+				<td style="display:none;">{{ ind.Calc_Agent }}</td>
+				<td style="display:none;">{{ ind.Reconstitution }}</td>
+				<td style="display:none;">{{ ind.Rebalance }}</td>
+				<td style="display:none;">{{ ind.Review }}</td>
+            <td style="background:#DCDCDC;">Review</td>
+            <td>{{ ind.Selection_Date_Cycle_1_rev }}</td>
+            <td style="background:#DCDCDC;">{{ ind.Completion_Date_rev }}</td>
+
+			<td>{{ ind.Selection_Date_Cycle_2_rev }}</td>
+			<!--<td style="background:#DCDCDC;">{{ ind.Ind_Cmte_Comm_Date_rev }}</td>-->
+            <td style="background:#DCDCDC;">{{ ind.Prelim_Comm_Date_rev }}</td>
+			<td>{{ ind.Weights_Share_Freeze_Date_rev }}</td>
+			<td style="background:#DCDCDC;">{{ ind.QC_Date_rev }}</td>
+			<td>{{ ind.Public_Announcement_Date_rev }}</td>
+			<td style="background:#DCDCDC;">{{ ind.Client_Comm_Date_rev }}</td>
+			<td>{{ ind.Comm_cal_Date_rev }}</td>
+			<td style="background:#DCDCDC;">{{ ind.Effective_Date_rev }}</td>
+        </tr>
+		{% endif %}
+
+
+		{% endfor %}
+	</tbody>
+	</table>
+	 {% else %}
+	<table class="table table-bordered" id = "noTable" style="table-layout: auto; width: 100%;">
+	<thead class="table-dark" style="font-size: 13px;">
+	  <tr bgcolor="#333">
+		<th>Index Name</th>
+		<th>Client Name</th>
+		<th style="display:none;">Contract Type</th>
+		<th style="display:none;">Type of Index</th>
+		<th style="display:none;">Index Style</th>
+		<th style="display:none;">Calculation Agent</th>
+		<th style="display:none;">Reconstitution</th>
+		<th style="display:none;">Rebalance</th>
+		<th style="display:none;">Review</th>
+        <th>Action</th>
+		<th>Selection date-1</th>
+		<th>Completion date-1</th>
+		<th>Selection Date-2</th>
+		<!--<th>Index Committee Communication Date</th>-->
+		<th>Preliminary Communication Date</th>
+		<th>Weights Freeze Date</th>
+		<th>Public Announcement Date</th>
+		<th>Client Communication Date</th>
+		<th>Communication to Calculation Agent</th>
+		<th>Effective Date</th>
+	  </tr>
+	</thead>
+	 <tbody style="font-size: 13px;">
+      <tr data-no-results-found><td colspan="13" style=" text-align:center; color:red; font-size:20px; font-weight:bold;">No Record Found !</td></tr>
+
+	</tbody>
+	</table>
+	{% endif %}
+
+	<!--{% if info %}
+		<div class="pagination">
+		<span class="step-links">
+		<center>
+			{% if info.has_previous %}
+				<a href="?page={{ info.previous_page_number }}">Previous</a>
+			{% endif %}
+
+			<span class="current">
+				Page {{ info.number }} of {{ info.paginator.num_pages }}.
+			</span>
+
+			{% if info.has_next %}
+				<a href="?page={{ info.next_page_number }}">Next</a>
+			{% endif %}
+			</center>
+		</span>
+		</div>
+	{% endif %}-->
+	</div>
+	</div>
+	</div>
+
+
+{% else %}
+	<div id ="elementID">
+	<div class="row">
+
+		<div class="cal_column">
+		<p>You are not logged in</p>
+		<a href="{% url 'login' %}">login</a>
+		</div>
+	</div>
+	</div>
+{% endif %}
+{% endblock %}

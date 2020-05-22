@@ -1,0 +1,186 @@
+/*!
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Author: 08-04-2019
+ * Licensed under : Self
+ */
+
+* {
+  margin : 0px;
+  box-sizing: border-box;
+}
+
+header{
+background:#D3D3D3;
+height: 80px;}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  height:60px;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  font-family: calibri;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+.topnav-right {
+  float: right;
+}
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+   /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+/*input[type= submit]{*/
+#btn_reg_ind{
+width:50%;
+height: 40px;
+margin-left: 23%;
+margin-top: 20px;
+background-color:#66B2FF;
+border: 1px;
+}
+input[type = text], select{
+width: 80%;
+/*height: 35px;*/}
+
+select[id= dd12]{width : 40%} select[id= dd1]{width : 40%}
+select[id= dd22]{width : 40%} select[id= dd2]{width : 40%}
+select[id= dd32]{width : 40%} select[id= dd3]{width : 40%}
+
+
+
+#elementID{
+  margin-top:25px;
+
+ }
+.cal_column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+
+
+}
+
+.row:after {
+  content: "";
+  display: table;
+
+  clear: both;
+}
+
+
+
+#btn_calendar{
+width:70%;
+height: 40px;
+
+background-color:#66B2FF;
+border: 1px;
+}
+input[type= button]{
+width:80%;
+height: 35px;
+
+background-color:#66B2FF;
+border: 1px;
+}
+
+input[type = month]{
+width: 80%;
+height: 35px;
+}
+#btn_report{
+width:80%;
+height: 35px;
+
+background-color:#66B2FF;
+border: 1px;
+}
+#element1{
+margin-left: 5%;
+}
+
+#container{
+margin-top: 0px;
+ }
+ 
+ 
+form.example{
+float:right;
+max-width:500px;
+}
+  form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+   height: 47px;
+  background: #f1f1f1;
+}
+
+form.example input[type= "submit"] {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+   height: 47px;
+  font-size: 15px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.row {
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		margin:0px;
+	}
+

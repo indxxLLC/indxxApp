@@ -1,0 +1,44 @@
+<!-- templates/postindex.html -->
+ <!--
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Created Date: 08-04-2019
+ * Modified Date: dd-mm-yyyy
+ * Licensed under : Self
+ --->
+{% extends 'base.html' %}
+{% block title %}Saved Index{% endblock %}
+
+{% block content %}
+{% if request.session.is_authentication %}
+	{% load static %}
+	 <div class="topnav">
+
+	  <a href = "{% url 'index' %}">Index List</a>
+	  <a href="{% url 'addindex' %}">Index Registration</a>
+	  <a href = "{% url 'report' %}">Report Generation</a>
+	  <a onclick = "removeid()">About</a>
+	  <div class="topnav-right">
+		<!--<a href="{% url 'back' %}">Back</a>-->
+		<a href="#">Hi {{ request.session.username|capfirst }},</a>
+		<a href="{% url 'logout' %}">logout</a>
+	  </div>
+
+	</div>
+	<div id= "elementID">
+	<br/>
+	<br/>
+	<center><h2>INDEX saved successfully!</h2></center>
+	<script>
+		window.location.href = "{% url 'index' %}";
+	</script>
+	{% csrf_token %}
+
+	</div>
+{% endif %}
+{% endblock %}
+</body>
+</html>
+

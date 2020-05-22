@@ -1,0 +1,137 @@
+<!-- templates/wc/base.html -->
+ <!--
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Created Date: 08-04-2019
+ * Modified Date: dd-mm-yyyy
+ * Licensed under : Self
+ --->
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Weight Calculation</title>
+	
+	<!--- Add css files here ---->
+
+	<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	
+	<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+	<link rel="stylesheet" href="{% static 'css/login.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	
+
+	
+	<!--- Add script files here ---->
+	
+	<script src="{% static 'js/tableToExcel.js' %}"></script>
+	<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>-->
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/popper.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	
+	
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+	<!--<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>-->
+	<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+	<script src="{% static 'js/validation.js' %}"></script>
+	<script src="{% static 'js/custom-jquery.js' %}"></script>
+	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .selected {
+            color:red;
+            text-decoration:underlined;
+        }
+        .in-active {
+            color:black;
+            text-decoration:none;
+		}
+		
+		body {
+		   background-image: url("/static/images/back.jpg");
+		   background-repeat: no-repeat;
+		   -webkit-background-size:cover;
+		   -moz-background-size:cover;
+		}
+    </style>
+
+
+	  
+	 
+</head>
+<header>
+ <a href="#"><h1><img src = "{% static 'images/logo.png' %}"></h1></a>
+ </header>
+
+  <main>
+  <div class="topnav">
+	<a class="active" href = "{% url 'equalweight' %}">Weight</a>
+	<a href = "#">Shares</a>
+	<!--<div class="topnav-right">
+	<a href="#">Hi </a>
+	<a href="#">Logout</a>
+	</div>-->
+</div>
+    {% block content %}
+    {% endblock %}
+<div class="clearboth"></div>
+ <!--/* <div id="footer">
+	 <p> © 2019 Indxx. All rights reserved | Designed & Developed by Indxx Capital Management</p>
+	</div>*/-->
+  </main>
+</body>
+
+
+<script>
+
+
+    $(document).ready(function () {
+        $('.menus').click(function () {
+
+            $('a').addClass('in-active');       // ADD CLASS TO ALL THE TAGS.
+
+            if ($(this).hasClass('in-active')) {    // CHECK IF THE TAG HAS 'in-active' CLASS.
+
+                $(this)
+                    .removeClass('in-active')
+                    .addClass('selected');
+            }
+        })
+	});
+
+
+	// For the inner drop button
+	var dropdown = document.getElementsByClassName("dropdown-btn");
+	var i;
+
+	for (i = 0; i<=dropdown.length; i++) 
+	{
+		dropdown[i].addEventListener("click", function() 
+		{
+			this.classList.toggle("active");
+			var dropdownContent = this.nextElementSibling;
+			if (dropdownContent.style.display === "block")
+			{
+				dropdownContent.style.display = "none";
+			} 
+			else 
+			{
+				dropdownContent.style.display = "block";
+			}
+	});	
+}
+
+
+
+</script>
+</html>
+

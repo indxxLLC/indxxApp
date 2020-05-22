@@ -1,0 +1,159 @@
+ <!-- templates/ViewIndex.html -->
+ <!--
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Created Date: 08-04-2019
+ * Modified Date: dd-mm-yyyy
+ * Licensed under : Self
+ --->
+
+{% extends 'base.html' %}
+{% block title %}Index List{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+	
+	<style>
+	.column {
+	  text-align: center;
+	  width: 50%;
+	  padding: 5px;
+
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+	.row {
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		margin-top:25px;
+	}
+	</style>
+	<div class="topnav">
+	<a href = "{% url 'index' %}">Index List</a>
+	<a href="{% url 'addindex' %}">Index Registration</a>
+	<a href = "{% url 'report' %}">Report Generation</a>
+	<!--<a onclick = "removeid()">About</a>--->
+	<div class="topnav-right">
+	<!--<a href="{% url 'back' %}">Back</a>-->
+	<a href="#">Hi {{ user.username|capfirst }},</a>
+	<a href="{% url 'logout' %}">Logout</a>
+	</div>
+
+	</div>
+	<div id = "elementID">
+	<div class="mainContainer">
+	<div class="gridDiv">
+
+	{% for ind in in_id %}
+
+		<div class="indexHeading"><!--{{ ind.Index_Name }} --><button><a class = "indexHeading" float="right" href="{% url 'index' %}">Back</a></button></div><br>
+		<div class="row">
+		<div class="column" style="background-color:#ddd;  padding-top: 10%;">
+		<h3>Index Name : </h3>
+		<h3>{{ ind.Index_Name }}</h3>
+
+		</div>
+
+
+		<div class="column" style="background-color:#eee;">
+		<label style="font-weight:bold; ">Client Name: </label>
+		{% for client in clientList %}
+			{% if ind.Client_Name_id|slugify == client.code %}
+				<label>{{ client.description }}</label><br>
+			{% endif %}
+		{% endfor %}
+		<label style="font-weight:bold; ">Index Style: </label>
+		<label>{{ind.Ind_Sty}}</label><br>
+		{% if not ind.Ind_Ver %}
+		{% else %}
+		<label style="font-weight:bold; ">Index Version: </label>
+		<label>{{ ind.Ind_Ver }}</label><br>
+		{% endif %}
+		{% if not ind.Ind_Ver_ID %}
+		{% else %}
+		<label style="font-weight:bold; ">Index Version Id: </label>
+		<label>{{ ind.Ind_Ver_ID }}</label><br>
+		{% endif %}
+		<label style="font-weight:bold; ">Calculation: </label>
+		<label>{{ ind.Calc }}</label><br>
+		<label style="font-weight:bold; ">Calculation Agent: </label>
+		<label>{{ ind.Calc_Agent }}</label><br>
+		{% if not ind.Data_Platform %}
+		{% else %}
+		<label style="font-weight:bold; ">Data Platform: </label>
+		<label>{{ ind.Data_Platform }}</label><br>
+		{% endif %}
+		{% if not ind.Data_Vendors %}
+		{% else %}
+		<label style="font-weight:bold; ">Data Vendors: </label>
+		<label>{{ ind.Data_Vendors }}</label><br>
+		{% endif %}
+		{% if not ind.Contract_Type %}
+		{% else %}
+		<label style="font-weight:bold; ">Contract Type: </label>
+		<label>{{ ind.Contract_Type }}</label><br>
+		{% endif %}
+		{% if not ind.Type_of_Ind %}
+		{% else %}
+		<label style="font-weight:bold; ">Index Type: </label>
+		<label>{{ ind.Type_of_Ind }}</label><br>
+		{% endif %}
+		{% if not ind.Product_Status %}
+		{% else %}
+		<label style="font-weight:bold; ">Product Status: </label>
+		<label>{{ ind.Product_Status }}</label><br>
+		{% endif %}
+		{% if not ind.ETF_Launched %}
+		{% else %}
+		<label style="font-weight:bold; ">ETF Launched: </label>
+		<label>{{ ind.ETF_Launched }}</label><br>
+		{% endif %}
+		{% if not ind.Reconstitution %}
+		{% else %}
+		<label style="font-weight:bold; ">Reconstitution: </label>
+		<label>{{ ind.Reconstitution }}</label><br>
+		{% endif %}
+		{% if not ind.Rebalance %}
+		{% else %}
+		<label style="font-weight:bold; ">Rebalancing: </label>
+		<label>{{ ind.Rebalance }}</label><br>
+		{% endif %}
+		{% if not ind.Review %}
+		{% else %}
+		<label style="font-weight:bold; ">Review: </label>
+		<label>{{ ind.Review }}</label><br>
+		{% endif %}
+		<label style="font-weight:bold; ">Theme Review: </label>
+		<label>{{ ind.Theme_Review }}</label><br>
+
+		</div>
+	
+
+	{% endfor %}
+	</div>
+	</div>
+	</div>
+	</div>
+	
+{% else %}
+	<div id ="elementID">
+	<div class="row">
+
+		<div class="cal_column">
+		<p>You are not logged in</p>
+		<a href="{% url 'login' %}">login</a>
+		</div>
+	</div>
+	</div>
+{% endif %}
+{% endblock %}
+

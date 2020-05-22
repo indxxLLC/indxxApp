@@ -1,0 +1,40 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<div id="elementID">
+{% if user.is_authenticated %}
+<script>
+    window.location.href = "{% url 'home' %}";
+</script>
+{% else %}
+	<div id="wrap">
+	<div class = "row">
+	<div class = "col-sm-12">
+	<div class = "wrap">
+	<h2><center>Login</center></h2>
+		<form class="loginform" method="post">
+		   {% csrf_token %}
+			{% if message %}
+				<span style="color:red; text-align:center"><center><strong>{{ message }}</strong></center></span>
+			{% endif %}
+			
+			{{ form.as_p }}
+			<p><button type="submit" id="btn_login">Login</button></p>
+		<!--
+		<input type="text" name = "email"  placeholder= "Email ID" required>
+			<input type="password" name = "password" placeholder = "Password" required>
+			<input type="submit" id="btn_login" name="login" value="Sign In" >-->
+
+		 <!--<p><a> Forgot Password? </a><a href= "#">Click Here</a></p>-->
+			</form>
+			</div>
+		</div>
+		</div>
+	</div>
+{% endif %}
+ </div>
+{% endblock %}

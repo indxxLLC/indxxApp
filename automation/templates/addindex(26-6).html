@@ -1,0 +1,670 @@
+<!-- templates/addindex.html -->
+{% extends 'base.html' %}
+{% block title %}Add Index{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+	{% load static %}
+	 <div class="topnav">
+
+	  <a href = "{% url 'index' %}">Index List</a>
+	  <a class="active" href="{% url 'addindex' %}">Index Registration</a>
+	  <a href = "{% url 'report' %}">Report Generation</a>
+	  <a onclick = "removeid()">About</a>
+	  <div class="topnav-right">
+		<!--<a href="{% url 'back' %}">Back</a>-->
+		<a href="#">Hi {{ user.username|capfirst }},</a>
+		<a href="{% url 'logout' %}">Logout</a>
+	  </div>
+
+	</div>
+	
+	
+	<div id= "elementID">
+	
+	<div class="mainContainer">
+	<div class="gridDiv">
+	<form id="RegForm" name="RegForm" action="{% url 'postindex' %}"  method="post" role="form" enctype="multipart/form-data">
+	{% csrf_token %}
+		<div class = "container_element">
+		<div class = "top" id="top">
+		<label class="label-heading">Index Info</label>
+		<div class="row">
+
+	  <div class="column"> 
+		<label>Index Name <span>*</span></label><br>
+		<input type = "text" name = "index_name" id ="index_name" placeholder="Index Name"><br>
+		</div>
+		<div class="column">
+		<label>ISIN ID <span>*</span></label><br>
+		<input type = "text" name = "isin_id"  id = "isin_id" placeholder="ISIN ID"><br>
+		</div>
+		 <div class="column">
+		  <label>Bloomberg ID <span>*</span></label><br>
+		  <input type = "text" name = "bloomberg_id" id = "bloomberg_id" placeholder="Bloomberg ID">
+		  <br>
+		  </div>
+		<div class="column"> 
+		<label>Thomson Reuters Id <span>*</span></label><br>
+		<input type = "text" name = "thomson_id" id = "thomson_id" placeholder="Thomson Reuters Id">
+		<br>
+		</div>
+		<div class="column"> 
+		<label>Client Name <span>*</span></label><br>
+		<select name="client_name" id="client_name">
+			<option value="">Select Any One</option>
+			{% for client in client_name %}
+				<option value ="{{ client.code }}" >{{ client.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+		</div>
+		 <div class="column"> 
+		<label>Index style <span>*</span></label><br>
+		<select name="index_Style" id="index_Style" onchange="showDiv('Cycle_2', 'Cycle_22', 'Cycle_23', this)">
+			<option value="">Select Any One</option>
+			{% for ind_Styl in ind_Sty %}
+				<option value ="{{ ind_Styl.description }}" >{{ ind_Styl.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+	  </div>
+		<div class="column"> 
+		<label>Index Version <span>*</span></label><br>
+		<select name="ind_version" id="ind_version">
+			<option value="">Select Any One</option>
+			{% for ind_Ver in ind_Version %}
+				<option value = {{ ind_Ver.description }} >{{ ind_Ver.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+		</div>
+		
+		<div class="column"> 
+		<label>Index Version ID <span>*</span></label><br>
+		<input type = "text" name = "index_version_id" id = "index_version_id" placeholder="Index Version ID">
+		<br>
+		</div>
+		 <div class="column">
+		<label>Calculation <span>*</span></label><br>
+		<select name="calculation" id="calculation">
+			<option value="">Select Any One</option>
+			{% for calcul in cal %}
+				<option value ="{{ calcul.description }}" >{{ calcul.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+	  </div>
+		
+		<div class="column"> 
+		<label>Calculation Agent <span>*</span></label><br>
+		<select name="cal_agent" id="cal_agent">
+			<option value="">Select Any One</option>
+			{% for agent in cal_Agent %}
+				<option value = {{ agent.description }} >{{ agent.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+		</div>
+		<div class="column"> 
+		<label>Data Platform <span>*</span></label><br>
+		<input type = "text" name = "data_platform" id = "data_platform" placeholder="Data Platform">
+		<br>
+		</div>
+		<div class="column">
+		<label>Data Vendors <span>*</span></label><br>
+		<input type = "text" name = "data_vendors"  id = "data_vendors" placeholder="Data Vendors">
+		<br>
+	  </div>
+		<div class="column"> 
+		<label>Contract Type <span>*</span></label><br>
+		<select name="contract_Type" id="contract_Type">
+			<option value="">Select Any One</option>
+			{% for contract_Typ in contract_Type %}
+				<option value = {{ contract_Typ.description }} >{{ contract_Typ.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+		</div>
+		<div class="column"> 
+		<label>Type of Index <span>*</span></label><br>
+		<select name="type_index" id="type_index">
+			<option value="">Select Any One</option>
+			{% for type_ind in type_of_Ind %}
+				<option value ="{{ type_ind.description }}">{{ type_ind.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+		</div>
+		<div class="column">
+		<label>Product Status <span>*</span></label><br>
+		<select name="prod_Status" id="prod_Status">
+			<option value="">Select Any One</option>
+			{% for prod_St in prod_Stat %}
+			<option value ="{{ prod_St.description }}" >{{ prod_St.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+	    </div>
+		<div class="column"> 
+		<label>ETF Launched <span>*</span></label><br>
+		<select name="etf_Launched" id="etf_Launched">
+			<option value="">Select Any One</option>
+			{% for etf_Launch in etf_Launched %}
+				<option value = {{ etf_Launch.description }} >{{ etf_Launch.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+		</div>
+		<div class="column"> 
+		  <label>Theme Review <span>*</span></label><br>
+		<select name="theme_Review" id="theme_Review">
+			<option value="">Select Any One</option>
+			{% for theme_Rev in theme_Review %}
+				<option value ="{{ theme_Rev.description }}" >{{ theme_Rev.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+		</div>
+		<div class="column">
+		<label>ETF Launched Date <span>*</span></label><br>
+		<input type="date" name="etf_date" id="etf_date">
+	  </div>
+		<div class="column"> 
+		<label>Index Go Live Date <span>*</span></label><br>
+		<input type="date" name="live_date" id="live_date" >
+		<br>
+	  </div>
+
+		<div class="column"> 
+		<label>Backtest Completion Date <span>*</span></label><br>
+		<input type="date" name="backtest_date" id="backtest_date">
+		<br>
+	  </div>
+	  <div class="column"> 
+		<div  class="nextback" onclick="showTab2()">Next</div>
+	  </div>
+	</div>
+	</div>
+	<div class ="bottom none" id="bottom" >
+		<label class="label-heading">Index Review Info: Reconstitution</label>
+		<div class = "row">
+		<div class="column">
+		<input type="radio" name='choice' checked onclick="showRules()"/>showRules
+		<input type="radio" name='choice' onclick="showDates()"/>showDates
+		</div>
+		</div>
+		<div class = "row">
+		
+		<div class="column">
+		<label>Reconstitution</label><br>
+		<select id="dd1" name="reconstitution">
+			<option value="">Select Any One</option>
+			{% for reconsti in reconstitution %}
+				<option value ="{{ reconsti.description }}" >{{ reconsti.description }}</option>
+			{% endfor %}
+		</select>
+		<select id="dd12" name = "reconst_month">
+			<option value="">Select</option>
+			<option value = "January">January</option>
+			<option value = "February">February</option>
+			<option value = "March">March</option>
+			<option value = "April">April</option>
+			<option value = "May">May</option>
+			<option value = "June">June</option>
+			<option value = "July">July</option>
+			<option value = "August">August</option>
+			<option value = "September">September</option>
+			<option value = "October">October</option>
+			<option value = "November">November</option>
+			<option value = "December">December</option>
+		</select>
+		<input type = text name = "ex" style="visibility:hidden;">
+		
+		</div>
+		<div class ="column">
+		<label>Selection Date – Cycle 1</label><br>
+		<select name="selec_Date_Cyc_1" id="selec_Date_Cyc_1" onchange="showInput('mnl_sel1_date', this)">
+			<option value="">Select Any One</option>
+			{% for sel_Date_Cyc1 in selec_Date_Cyc_1 %}
+			<option value ="{{ sel_Date_Cyc1.code }}" >{{ sel_Date_Cyc1.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_sel1_date" id="mnl_sel1_date">
+		</div>
+		<div class="column">
+		<label>Completion Date - Cycle 1</label><br>
+		<select name="cmp_Date" id="cmp_Date" onchange="showInput('mnl_cmp_date', this)">
+			<option value="">Select Any One</option>
+			{% for cmp_date in comp_Date %}
+				<option value ="{{ cmp_date.code }}" >{{ cmp_date.description }}</option>
+			{% endfor %}
+		</select>
+		<input type="date" class="none" name="mnl_cmp_date" id="mnl_cmp_date">
+		</div>
+		<div class="column">
+		<label>Effective Date</label><br>
+		<select name="effective_date" id="effective_date" onchange="showInput('mnl_eff_date', this)">
+			<option value="">Select Any One</option>
+			{% for eff_date in effec_Date %}
+			<option value ="{{ eff_date.code }}" >{{ eff_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_eff_date" id="mnl_eff_date">
+		</div>
+		<div class="column" id="Cycle_22">
+		<label name="">Selection Date - Cycle 2</label><br>
+		<select name="selec_Date_Cyc_2" id="selec_Date_Cyc_2" onchange="showInput('mnl_sel2_date', this)">
+			<option value="">Select Any One</option>
+			{% for sel_Date_Cyc2 in selec_Date_Cyc_2 %}
+			<option value = "{{ sel_Date_Cyc2.code }}" >{{ sel_Date_Cyc2.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_sel2_date" id="mnl_sel2_date">
+		</div>
+		<div class="column">
+		<label>Index Commitee Communication Date</label><br>
+		<select name="ind_Comm_Date" id="ind_Comm_Date" onchange="showInput('mnl_ind_Comm_date', this)">
+			<option value="">Select Any One</option>
+			{% for ind_comm_date in ind_Cmte_Comm_Date %}
+			<option value ="{{ ind_comm_date.code }}" >{{ ind_comm_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_ind_Comm_date" id="mnl_ind_Comm_date">
+		</div>
+		
+		<div class="column">
+        <label>Preliminary Communication Date</label><br>
+		<select name="pre_comm_date" id="pre_comm_date" onchange="showInput('mnl_prelim_date', this)">
+			<option value="">Select Any One</option>
+			{% for pre_comm_date in prelim_Comm_Date %}
+			<option value ="{{ pre_comm_date.code }}" >{{ pre_comm_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_prelim_date" id="mnl_prelim_date">
+		</div>
+		<div class="column">
+		<label>Weights/Share Freeze Date</label><br>
+		<select name="weights_Share_Freeze" id="weights_Share_Freeze" onchange="showInput('mnl_freeze_date', this)">
+			<option value="">Select Any One</option>
+			{% for w_Share_Freeze in weights_Share_Freeze %}
+				<option value ="{{ w_Share_Freeze.code }}" >{{ w_Share_Freeze.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_freeze_date" id="mnl_freeze_date">
+		</div>
+		<div class="column">
+		<label>Public Announcement Date</label><br>
+		<select name="public_Announcement" id="public_Announcement" onchange="showInput('mnl_pb_announce_date', this)">
+			<option value="">Select Any One</option>
+			{% for public_announce in public_Announcement %}
+			<option value ="{{ public_announce.code }}" >{{ public_announce.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_pb_announce_date" id="mnl_pb_announce_date">
+		</div>
+		<div class="column">
+		<label>Client Communication Date</label><br>
+		<select name="client_Comm" id="client_Comm" onchange="showInput('mnl_client_comm_date', this)">
+			<option value="">Select Any One</option>
+			{% for client_Com in client_Comm %}
+			<option value ="{{ client_Com.code }}" >{{ client_Com.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_client_comm_date" id="mnl_client_comm_date">
+		</div>
+
+		<div class="column">
+		<label>Communication to Calculation Agent</label>
+		<select name="comm_to_Calc_Agent" id="comm_to_Calc_Agent" onchange="showInput('mnl_comm_cal_date', this)">
+			<option value = "">Select Any One</option>
+			{% for c_to_Calc_Agent in comm_to_Calc_Agent %}
+			<option value ="{{ c_to_Calc_Agent.code }}">{{ c_to_Calc_Agent.description }}</option>
+			{% endfor %}
+		</select>
+		<input type="date" class="none" name="mnl_comm_cal_date" id="mnl_comm_cal_date">
+		</div>
+		<div class="column"> 
+			<div  class="nextback" onclick="showTab1()">Back</div>
+			<div  class="nextback" onclick="showTab3()">Next</div>
+		</div>
+		</div>
+		</div>
+		<div class = "bottom1 none" id="bottom1" >
+		<label class="label-heading">Index Review Info: Rebalance</label>
+		<div class = "row">
+		
+		<div class = "column">
+		<label>Rebalance</label><br>
+		<select id="dd2" name="rebalance">
+			<option value="">Select Any One</option>
+			{% for rebalanc in rebalance %}
+			<option value ="{{ rebalanc.description }}" >{{ rebalanc.description }}</option>
+			{% endfor %}
+			</select>
+			<select id="dd22" name = "rebalance_month">
+			<option value="">Select</option>
+			<option value = "January">January</option>
+			<option value = "February">February</option>
+			<option value = "March">March</option>
+			<option value = "April">April</option>
+			<option value = "May">May</option>
+			<option value = "June">June</option>
+			<option value = "July">July</option>
+			<option value = "August">August</option>
+			<option value = "September">September</option>
+			<option value = "October">October</option>
+			<option value = "November">November</option>
+			<option value = "December">December</option>
+		</select>
+		
+		<input type = text name ="ex" style="visibility:hidden;">
+		
+		</div>
+		<div class = "column">
+		<label>Selection Date – Cycle 1</label><br>
+		<select name="selec_Date_Cyc_1_rebal" id="selec_Date_Cyc_1_rebal" onchange="showInput('mnl_sel1_date_rebal', this)">
+			<option value="">Select Any One</option>
+			{% for sel_Date_Cyc1 in selec_Date_Cyc_1 %}
+			<option value = "{{ sel_Date_Cyc1.code }}" >{{ sel_Date_Cyc1.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_sel1_date_rebal" id="mnl_sel1_date_rebal">
+		</div>
+		<div class="column">
+		<label>Completion Date - Cycle 1</label><br>
+		<select name="cmp_Date_rebal" id="cmp_Date_rebal" onchange="showInput('mnl_cmp_date_rebal', this)">
+			<option value="">Select Any One</option>
+			{% for cmp_date in comp_Date %}
+			<option value = "{{ cmp_date.code }}" >{{ cmp_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_cmp_date_rebal" id="mnl_cmp_date_rebal">
+		<br>
+		</div>
+		<div class = "column">
+		<label>Effective Date</label><br>
+		<select name="effective_date_rebal" id="effective_date_rebal" onchange="showInput('mnl_eff_date_rebal', this)">
+			<option value="">Select Any One</option>
+			{% for eff_date in effec_Date %}
+			<option value = "{{ eff_date.code }}" >{{ eff_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_eff_date_rebal" id="mnl_eff_date_rebal">
+		<br>
+		</div>
+		<div class = "column" id="Cycle_2">
+		<label name="">Selection Date - Cycle 2</label><br>
+		<select name="selec_Date_Cyc_2_rebal" id="selec_Date_Cyc_2_rebal" onchange="showInput('mnl_sel2_date_rebal', this)">
+			<option value="">Select Any One</option>
+			{% for sel_Date_Cyc2 in selec_Date_Cyc_2 %}
+			<option value = "{{ sel_Date_Cyc2.code }}" >{{ sel_Date_Cyc2.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_sel2_date_rebal" id="mnl_sel2_date_rebal">
+		<br>
+		</div>
+		<div class = "column">
+		<label>Index Commitee Communication Date</label><br>
+		<select name="ind_Comm_Date_rebal" id="ind_Comm_Date_rebal" onchange="showInput('mnl_ind_Comm_date_rebal', this)">
+			<option value="">Select Any One</option>
+			{% for ind_comm_date in ind_Cmte_Comm_Date %}
+			<option value = "{{ ind_comm_date.code }}" >{{ ind_comm_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_ind_Comm_date_rebal" id="mnl_ind_Comm_date_rebal">
+		<br>
+		</div>
+		<div class = "column">
+		<label>Preliminary Communication Date</label><br>
+		<select name="pre_comm_date_rebal" id="pre_comm_date_rebal" onchange="showInput('mnl_prelim_date_rebal', this)">
+			<option value="">Select Any One</option>
+			{% for pre_comm_date in prelim_Comm_Date %}
+			<option value = "{{ pre_comm_date.code }}" >{{ pre_comm_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_prelim_date_rebal" id="mnl_prelim_date_rebal">
+		<br>
+		</div>
+		<div class = "column">
+		<label>Weights/Share Freeze Date</label><br>
+		<select name="weights_Share_Freeze_rebal" id="weights_Share_Freeze_rebal" onchange="showInput('mnl_freeze_date_rebal', this)">
+			<option value="">Select Any One</option>
+			{% for w_Share_Freeze in weights_Share_Freeze %}
+			<option value = "{{ w_Share_Freeze.code }}" >{{ w_Share_Freeze.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_freeze_date_rebal" id="mnl_freeze_date_rebal">
+		<br>
+		</div>
+		<div class = "column">
+		<label>Public Announcement Date</label><br>
+		<select name="public_Announcement_rebal" id="public_Announcement_rebal" onchange="showInput('mnl_pb_announce_date_rebal', this)">
+			<option value="">Select Any One</option>
+			{% for public_announce in public_Announcement %}
+			<option value = "{{ public_announce.code }}" >{{ public_announce.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_pb_announce_date_rebal" id="mnl_pb_announce_date_rebal">
+		</div>
+		<div class = "column">
+		<label>Client Communication Date</label><br>
+		<select name="client_Comm_rebal" id="client_Comm_rebal" onchange="showInput('mnl_client_comm_date_rebal', this)">
+			<option value="">Select Any One</option>
+			{% for client_Com in client_Comm %}
+			<option value = "{{ client_Com.code }}" >{{ client_Com.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_client_comm_date_rebal" id="mnl_client_comm_date_rebal">
+		</div>
+		<div class = "column">
+		<label>Communication to Calculation Agent</label>
+		<select name="comm_to_Calc_Agent_rebal" id="comm_to_Calc_Agent_rebal" onchange="showInput('mnl_comm_cal_date_rebal', this)">
+			<option value = "">Select Any One</option>
+			{% for c_to_Calc_Agent in comm_to_Calc_Agent %}
+			<option value = "{{ c_to_Calc_Agent.code }}">{{ c_to_Calc_Agent.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_comm_cal_date_rebal" id="mnl_comm_cal_date_rebal">
+		</div>
+		<div class = "column">
+			<div  class="nextback" onclick="showTab2()">Back</div>
+			<div  class="nextback" onclick="showTab4()">Next</div>
+		</div>
+		</div>
+		</div>
+		<div class = "bottom2 none" id="bottom2" >
+		<label class="label-heading">Index Review Info: Review</label>
+		<div class = "row">
+
+		<div class = "column">
+		<label>Review</label><br>
+		<select id="dd3" name="review">
+			<option value="">Select Any One</option>
+			{% for rev in review %}
+			<option value = "{{ rev.description }}" >{{ rev.description }}</option>
+			{% endfor %}
+		</select>
+		<select id="dd32" name = "review_month">
+			<option value="">Select</option>
+			<option value ="January">January</option>
+			<option value = "February">February</option>
+			<option value = "March">March</option>
+			<option value = "April">April</option>
+			<option value = "May">May</option>
+			<option value = "June">June</option>
+			<option value = "July">July</option>
+			<option value = "August">August</option>
+			<option value = "September">September</option>
+			<option value = "October">October</option>
+			<option value = "November">November</option>
+			<option value = "December">December</option>
+		</select>
+		<input type = text name = "ex" style="visibility:hidden;">
+		
+		</div>
+		<div class = "column">
+		<label>Selection Date – Cycle 1</label><br>
+		<select name="selec_Date_Cyc_1_review" id="selec_Date_Cyc_1_review" onchange="showInput('mnl_sel1_date_review', this)">
+			<option value="">Select Any One</option>
+			{% for sel_Date_Cyc1 in selec_Date_Cyc_1 %}
+			<option value = "{{ sel_Date_Cyc1.code }}" >{{ sel_Date_Cyc1.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_sel1_date_review" id="mnl_sel1_date_review">
+		<br>
+		</div>
+		
+		<div class="column">
+		<label>Completion Date - Cycle 1</label><br>
+		<select name="cmp_Date_review" id="cmp_Date_review" onchange="showInput('mnl_cmp_date_review', this)">
+			<option value="">Select Any One</option>
+			{% for cmp_date in comp_Date %}
+			<option value = "{{ cmp_date.code }}" >{{ cmp_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_cmp_date_review" id="mnl_cmp_date_review">
+		<br>
+		</div>
+		<div class = "column">
+		<label>Effective Date</label><br>
+		<select name="effective_date_review" id="effective_date_review" onchange="showInput('mnl_eff_date_review', this)">
+			<option value="">Select Any One</option>
+			{% for eff_date in effec_Date %}
+			<option value = "{{ eff_date.code }}" >{{ eff_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_eff_date_review" id="mnl_eff_date_review">
+		<br>
+		</div>
+		<div class = "column" id="Cycle_23">
+		<label name="">Selection Date - Cycle 2</label><br>
+		<select name="selec_Date_Cyc_2_review" id="selec_Date_Cyc_2_review" onchange="showInput('mnl_sel2_date_review', this)">
+			<option value="">Select Any One</option>
+			{% for sel_Date_Cyc2 in selec_Date_Cyc_2 %}
+			<option value = "{{ sel_Date_Cyc2.code }}" >{{ sel_Date_Cyc2.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_sel2_date_review" id="mnl_sel2_date_review">
+		<br>
+		</div>
+		<div class = "column">
+		<label>Index Commitee Communication Date</label><br>
+		<select name="ind_Comm_Date_review" id="ind_Comm_Date_review" onchange="showInput('mnl_ind_Comm_date_review', this)">
+			<option value="">Select Any One</option>
+			{% for ind_comm_date in ind_Cmte_Comm_Date %}
+			<option value = "{{ ind_comm_date.code }}" >{{ ind_comm_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_ind_Comm_date_review" id="mnl_ind_Comm_date_review">
+		<br>
+		</div>
+		<div class = "column">
+		<label>Preliminary Communication Date</label><br>
+		<select name="pre_comm_date_review" id="pre_comm_date_review" onchange="showInput('mnl_prelim_date_review', this)">
+			<option value="">Select Any One</option>
+			{% for pre_comm_date in prelim_Comm_Date %}
+			<option value = "{{ pre_comm_date.code }}" >{{ pre_comm_date.description }}</option>
+			{% endfor %}
+		</select>
+		<br>
+		<input type="date" class="none" name="mnl_prelim_date_review" id="mnl_prelim_date_review">
+		
+		</div>
+		<div class = "column">
+		<label>Weights/Share Freeze Date</label><br>
+		<select name="weights_Share_Freeze_review" id="weights_Share_Freeze_review" onchange="showInput('mnl_freeze_date_review', this)">
+			<option value="">Select Any One</option>
+			{% for w_Share_Freeze in weights_Share_Freeze %}
+				<option value = "{{ w_Share_Freeze.code }}" >{{ w_Share_Freeze.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_freeze_date_review" id="mnl_freeze_date_review">
+		<br>
+		</div>
+		<div class = "column">
+		<label>Public Announcement Date</label><br>
+		<select name="public_Announcement_review" id="public_Announcement_review" onchange="showInput('mnl_pb_announce_date_review', this)">
+			<option value="">Select Any One</option>
+			{% for public_announce in public_Announcement %}
+			<option value = "{{ public_announce.code }}" >{{ public_announce.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_pb_announce_date_review" id="mnl_pb_announce_date_review">
+		</div>
+		<div class = "column">
+		<label>Client Communication Date</label><br>
+		<select name="client_Comm_review" id="client_Comm_review" onchange="showInput('mnl_client_comm_date_review', this)">
+			<option value="">Select Any One</option>
+			{% for client_Com in client_Comm %}
+			<option value = "{{ client_Com.code }}" >{{ client_Com.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_client_comm_date_review" id="mnl_client_comm_date_review">
+		</div>
+		<div class = "column">
+		<label>Communication to Calculation Agent</label>
+		<select name="comm_to_Calc_Agent_review" id="comm_to_Calc_Agent_review" onchange="showInput('mnl_comm_cal_date_review', this)">
+			<option value = "">Select Any One</option>
+			{% for c_to_Calc_Agent in comm_to_Calc_Agent %}
+			<option value = "{{ c_to_Calc_Agent.code }}">{{ c_to_Calc_Agent.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<input type="date" class="none" name="mnl_comm_cal_date_review" id="mnl_comm_cal_date_review">
+		</div>
+		<div class = "column">
+			<div class="nextback"  onclick="showTab3()">Back</div>
+		</div>
+		</div>
+		</div>
+
+		</div>
+		<div id="btns">
+		<input type="submit" id="btn_reg_ind" name="register" value="REGISTER INDEX" >
+		<a href="{% url 'index' %}"  id="btn_reset_ind" class = "btn_reset" name="reset">CANCEL</a>
+		<div class="clearboth"></div>
+		</div>
+	</form>
+	</div>
+	</div>
+	</div>
+
+{% else %}
+	<div id = "elementID">
+	<div class="row">
+
+		<div class="cal_column">
+		<p>You are not logged in</p>
+		<a href="{% url 'login' %}">login</a>
+		</div>
+	</div>
+	</div>
+{% endif %}
+{% endblock %}

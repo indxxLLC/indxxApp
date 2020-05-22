@@ -1,0 +1,311 @@
+<!-- templates/addindex.html -->
+ <!--
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Created Date: 08-04-2019
+ * Modified Date: dd-mm-yyyy
+ * Licensed under : Self
+ --->
+{% extends 'base.html' %}
+{% block title %}Add Index{% endblock %}
+
+{% block content %}
+{% if request.session.is_authentication %}
+	{% load static %}
+	 <div class="topnav">
+
+	  <a href = "{% url 'index' %}">Index List</a>
+	  <a href="#">Index Registration</a>
+	  <a href = "{% url 'report' %}">Report Generation</a>
+	  <a onclick = "removeid()">About</a>
+	  <div class="topnav-right">
+		<!--<a href="{% url 'back' %}">Back</a>-->
+		<a href="#">Hi {{ request.session.username|capfirst }},</a>
+		<a href="{% url 'logout' %}">logout</a>
+	  </div>
+
+	</div>
+	<div id= "elementId">
+	<form name="RegForm" action="{% url 'postindex' %}" method="post" role="form" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="row">
+
+	  <div class="column"> 
+		<label>ISIN ID</label><br>
+		<input type = "text" name = "isin_id" ><br><br>
+		<label>Index Name</label><br> 
+		<input type = "text" name = "index_name" required>
+		<br><br>
+		<label>Index Version</label><br>
+		<select name="ind_version">
+			<option value="">Select Any One</option>
+			{% for ind_Ver in ind_Version %}
+				<option value = {{ ind_Ver.code }} >{{ ind_Ver.description }}</option>
+			{% endfor %}
+		</select>
+		<br><br>
+		<label>Calculation Agent</label><br>
+		<select name="cal_agent">
+			<option value="">Select Any One</option>
+			{% for agent in cal_Agent %}
+				<option value = {{ agent.code }} >{{ agent.description }}</option>
+			{% endfor %}
+		</select>
+		<br><br>
+		<label>Contract Type</label><br>
+		<select name="contract_Type">
+			<option value="">Select Any One</option>
+			{% for contract_Typ in contract_Type %}
+				<option value = {{ contract_Typ.code }} >{{ contract_Typ.description }}</option>
+			{% endfor %}
+		</select>
+		<br><br>
+		<label>Reconstitution</label><br>
+		<select id="dd1" name="reconstitution">
+			<option value="">Select Any One</option>
+			{% for reconsti in reconstitution %}
+				<option value = {{ reconsti.description }} >{{ reconsti.description }}</option>
+			{% endfor %}
+		</select>
+		<select id="dd12" name = "reconst_month">
+			<option value="">Select</option>
+			<option value = "January">January</option>
+			<option value = "February">February</option>
+			<option value = "March">March</option>
+			<option value = "April">April</option>
+			<option value = "May">May</option>
+			<option value = "June">June</option>
+			<option value = "July">July</option>
+			<option value = "August">August</option>
+			<option value = "September">September</option>
+			<option value = "October">October</option>
+			<option value = "November">November</option>
+			<option value = "December">December</option>
+		</select>
+		<br><br>
+		<label>ETF Launched</label><br>
+		<select name="etf_Launched">
+			<option value="">Select Any One</option>
+			{% for etf_Launch in etf_Launched %}
+				<option value = {{ etf_Launch.code }} >{{ etf_Launch.description }}</option>
+			{% endfor %}
+		</select>
+			<br><br>
+		<label>Completion Date - Cycle 1</label><br>
+		<select name="cmp_Date">
+			<option value="">Select Any One</option>
+			{% for cmp_date in comp_Date %}
+				<option value = {{ cmp_date.code }} >{{ cmp_date.description }}</option>
+			{% endfor %}
+		</select>
+			<br><br>
+		<label>Index Commitee Communication Date</label><br>
+		<select name="ind_Comm_Date">
+			<option value="">Select Any One</option>
+			{% for ind_comm_date in ind_Cmte_Comm_Date %}
+				<option value = {{ ind_comm_date.code }} >{{ ind_comm_date.description }}</option>
+			{% endfor %}
+		</select>
+			<br><br>
+		<label>Public Announcement Date</label><br>
+		<select name="public_Announcement">
+			<option value="">Select Any One</option>
+			{% for public_announce in public_Announcement %}
+				<option value = {{ public_announce.code }} >{{ public_announce.description }}</option>
+			{% endfor %}
+		</select>
+	  </div>
+
+
+
+	  <div class="column">
+		<label>Bloomberg ID</label><br>
+		<input type = "text" name = "bloomberg_id" ><br><br>
+		<label>Client Name</label><br>
+		<select name="client_name">
+			<option value="">Select Any One</option>
+			{% for client in client_name %}
+				<option value = {{ client.code }} >{{ client.description }}</option>
+			{% endfor %}
+		</select>
+		<br><br>
+		<label>Index Version ID</label><br>
+		<input type = "text" name = "index_version_id" >
+		<br><br>
+		<label>Data Platform</label><br>
+		<input type = "text" name = "data_platform">
+		<br><br>
+		<label>Type of Index</label><br>
+		<select name="type_index">
+			<option value="">Select Any One</option>
+			{% for type_ind in type_of_Ind %}
+				<option value = {{ type_ind.code }} >{{ type_ind.description }}</option>
+			{% endfor %}
+		</select>
+		<br><br>
+		<label>Rebalance</label><br>
+		<select id="dd2" name="rebalance">
+			<option value="">Select Any One</option>
+			{% for rebalanc in rebalance %}
+				<option value = {{ rebalanc.description }} >{{ rebalanc.description }}</option>
+			{% endfor %}
+		</select>
+	<select id="dd22" name = "rebalance_month">
+		<option value="">Select</option>
+		<option value = "January">January</option>
+			<option value = "February">February</option>
+			<option value = "March">March</option>
+			<option value = "April">April</option>
+			<option value = "May">May</option>
+			<option value = "June">June</option>
+			<option value = "July">July</option>
+			<option value = "August">August</option>
+			<option value = "September">September</option>
+			<option value = "October">October</option>
+			<option value = "November">November</option>
+			<option value = "December">December</option>
+	</select>
+	<br><br>
+		<label>Theme Review</label><br>
+		<select name="theme_Review">
+			<option value="">Select Any One</option>
+			{% for theme_Rev in theme_Review %}
+				<option value = {{ theme_Rev.code }} >{{ theme_Rev.description }}</option>
+			{% endfor %}
+		</select>
+			<br><br>
+		<label>Effective Date</label><br>
+		<select name="effective_date">
+			<option value="">Select Any One</option>
+			{% for eff_date in effec_Date %}
+				<option value = {{ eff_date.code }} >{{ eff_date.description }}</option>
+			{% endfor %}
+		</select>
+			<br><br>
+		<label>Preliminary Communication Date</label><br>
+		<select name="pre_comm_date">
+			<option value="">Select Any One</option>
+			{% for pre_comm_date in prelim_Comm_Date %}
+				<option value = {{ pre_comm_date.code }} >{{ pre_comm_date.description }}</option>
+			{% endfor %}
+		</select>
+		
+		<br><br>
+		<label>Client Communication Date</label><br>
+		<select name="client_Comm">
+			<option value="">Select Any One</option>
+			{% for client_Com in client_Comm %}
+				<option value = {{ client_Com.code }} >{{ client_Com.description }}</option>
+			{% endfor %}
+		</select>
+	  </div>
+
+
+
+
+	  <div class="column">
+	  <label>Thomson Reuters ID</label>
+	  <input type = "text" name = "thomson_id" ><br><br>
+		<label>Index style</label><br>
+		<select name="index_Style">
+			<option value="">Select Any One</option>
+			{% for ind_Styl in ind_Sty %}
+				<option value = {{ ind_Styl.code }} >{{ ind_Styl.description }}</option>
+			{% endfor %}
+		</select>
+		<br><br>
+		<label>Calculation</label><br>
+		<select name="calculation">
+			<option value="">Select Any One</option>
+			{% for calcul in cal %}
+				<option value = {{ calcul.code }} >{{ calcul.description }}</option>
+			{% endfor %}
+		</select>
+		<br><br>
+		<label>Data Vendors</label><br>
+		<input type = "text" name = "data_vendors" >
+		<br><br>
+		<label>Product Status</label><br>
+		<select name="prod_Status">
+			<option value="">Select Any One</option>
+			{% for prod_St in prod_Stat %}
+			<option value = {{ prod_St.description }} >{{ prod_St.description }}</option>
+			{% endfor %}
+		</select>
+		<br><br>
+		<label>Review</label><br>
+		<select id="dd3" name="review">
+			<option value="">Select Any One</option>
+			{% for rev in review %}
+			<option value = {{ rev.description }} >{{ rev.description }}</option>
+			{% endfor %}
+		</select>
+	<select id="dd32" name = "review_month">
+		<option value="">Select</option>
+		<option value = "January">January</option>
+			<option value = "February">February</option>
+			<option value = "March">March</option>
+			<option value = "April">April</option>
+			<option value = "May">May</option>
+			<option value = "June">June</option>
+			<option value = "July">July</option>
+			<option value = "August">August</option>
+			<option value = "September">September</option>
+			<option value = "October">October</option>
+			<option value = "November">November</option>
+			<option value = "December">December</option>
+	</select>
+		<br><br>
+		<label>Selection Date – Cycle 1</label><br>
+		<select name="selec_Date_Cyc_1">
+			<option value="">Select Any One</option>
+			{% for sel_Date_Cyc1 in selec_Date_Cyc_1 %}
+				<option value = {{ sel_Date_Cyc1.code }} >{{ sel_Date_Cyc1.description }}</option>
+			{% endfor %}
+		</select>
+			<br><br>
+		<label name="">Selection Date - Cycle 2</label><br>
+		<select name="selec_Date_Cyc_2">
+			<option value="">Select Any One</option>
+			{% for sel_Date_Cyc2 in selec_Date_Cyc_2 %}
+				<option value = {{ sel_Date_Cyc2.code }} >{{ sel_Date_Cyc2.description }}</option>
+			{% endfor %}
+		</select>
+			<br><br>
+		<label>Weights/Share Freeze Date</label><br>
+		<select name="weights_Share_Freeze">
+			<option value="">Select Any One</option>
+			{% for w_Share_Freeze in weights_Share_Freeze %}
+				<option value = {{ w_Share_Freeze.code }} >{{ w_Share_Freeze.description }}</option>
+			{% endfor %}
+		</select>
+		  <br><br>
+		  <label>Communication to Calculation Agent</label>
+		  <select name="comm_to_Calc_Agent">
+			  <option value = "">Select Any One</option>
+			  {% for c_to_Calc_Agent in comm_to_Calc_Agent %}
+				   <option value = {{ c_to_Calc_Agent.code }}>{{ c_to_Calc_Agent.description }}</option>
+			  {% endfor %}
+		  </select>
+	  </div>
+	</div>
+
+	<input type="submit" id="btn_reg_ind" name="register" value="REGISTER INDEX" >
+
+	</form>
+	</div>
+
+{% else %}
+	<div id = elementID>
+	<div class="row">
+
+		<div class="cal_column">
+		<p>You are not logged in</p>
+		<a href="{% url 'login' %}">login</a>
+		</div>
+	</div>
+	</div>
+{% endif %}
+{% endblock %}

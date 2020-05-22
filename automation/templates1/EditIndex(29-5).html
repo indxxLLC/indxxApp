@@ -1,0 +1,280 @@
+<!-- templates/EditIndex.html -->
+ <!--
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Created Date: 08-04-2019
+ * Modified Date: dd-mm-yyyy
+ * Licensed under : Self
+ --->
+{% extends 'base.html' %}
+{% block title %}Edit Index{% endblock %}
+
+{% block content %}
+{% if request.session.is_authentication %}
+	{% load static %}
+
+ <div class="topnav">
+	<a href = "{% url 'index' %}">Index List</a>
+	<a href="{% url 'addindex' %}">Index Registration</a>
+	<a href = "{% url 'report' %}">Report Generation</a>
+  <a onclick = "removeid()">About</a>
+    <div class="topnav-right">
+    <!--<a href="{% url 'back' %}">Back</a>-->
+	<a href="#">Hi {{ request.session.username|capfirst }},</a>
+    <a href="{% url 'logout' %}">logout</a>
+  </div>
+
+</div>
+<div id= "elementID">
+	{% for ind in in_id %}
+<form name="RegForm" action="{% url 'updateindex' ind.id %}" method="post" role="form" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="row">
+
+  <div class="column">
+    <label>ISIN ID</label><br>
+
+	<input type = "text" name = "isin_id" value = "{{ind.Ident_ISIN }} "><br><br>
+	<label>Index Name</label><br>
+	<input type = "text" name = "index_name" value = "{{ind.Index_Name }} ">
+	<br><br>
+	<label>Index Version</label><br>
+	<select name="ind_version">
+		<!--<option value = {{ ind.Ind_Ver }}>{{ ind.Ind_Ver }}</option>-->
+		{% for ind_Ver in ind_Version %}
+			<option {% if ind.Ind_Ver == ind_Ver.description %} selected {% endif %} value ="{{ ind_Ver.description }}" >{{ ind_Ver.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Calculation Agent</label><br>
+	<select name="cal_agent">
+		<!--<option value={{ ind.Calc_Agent }}>{{ ind.Calc_Agent }}</option>-->
+		{% for agent in cal_Agent %}
+			<option {% if ind.Calc_Agent == agent.description %} selected {% endif %} value ="{{ agent.description }}" >{{ agent.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Contract Type</label><br>
+	<select name="contract_Type">
+		<!--<option value={{ ind.Contract_Type }}>{{ ind.Contract_Type }}</option>-->
+		{% for contract_Typ in contract_Type %}
+			<option {% if ind.Contract_Type == contract_Typ.description %} selected {% endif %} value ="{{ contract_Typ.description }}" >{{ contract_Typ.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Reconstitution</label><br>
+	<select id="dd1" name="reconstitution" onchange="configureDropDownLists(this,document.getElementById('dd12'))">
+		<!--<option value={{ ind.Reconstitution }}>{{ ind.Reconstitution }}</option>-->
+		{% for reconsti in reconstitution %}
+			<option {% if ind.Reconstitution == reconsti.description %} selected {% endif %} value ="{{ reconsti.description }}" >{{ reconsti.description }}</option>
+		{% endfor %}
+	</select>
+	<select id="dd12" name="reconst_month">
+		<option value={{ ind.reconst_month }}>{{ ind.reconst_month }}</option>
+	</select>
+	<br><br>
+	<label>ETF Launched</label><br>
+	<select name="etf_Launched">
+		<!--<option value={{ ind.ETF_Launched }}>{{ ind.ETF_Launched }}</option>-->
+		{% for etf_Launch in etf_Launched %}
+			<option {% if ind.ETF_Launched == etf_Launch.description %} selected {% endif %} value ="{{ etf_Launch.description }}" >{{ etf_Launch.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Completion Date - Cycle 1</label><br>
+	<select name="cmp_Date">
+		<!--<option value = {{ ind.Completion_Date }} > {{ ind.Completion_Date }}</option>-->
+		{% for cmp_date in comp_Date %}
+			<option {% if ind.Completion_Date == cmp_date.description %} selected {% endif %} value ="{{ cmp_date.description }}" >{{ cmp_date.description }}</option>
+		{% endfor %}
+	</select>
+		<br><br>
+	<label>Index Commitee Communication Date</label><br>
+	<select name="ind_Comm_Date">
+		<!--<option value={{ ind.Ind_Cmte_Comm_Date }}>{{ ind.Ind_Cmte_Comm_Date }}</option>-->
+		{% for ind_comm_date in ind_Cmte_Comm_Date %}
+			<option {% if ind.Ind_Cmte_Comm_Date == ind_comm_date.description %} selected {% endif %} value ="{{ ind_comm_date.description }}" >{{ ind_comm_date.description }}</option>
+		{% endfor %}
+	</select>
+		<br><br>
+	<label>Public Announcement Date</label><br>
+	<select name="public_Announcement">
+		<!--<option value={{ ind.Public_Announcement_Date }}>{{ ind.Public_Announcement_Date }}</option>-->
+		{% for public_announce in public_Announcement %}
+			<option {% if ind.Public_Announcement_Date == public_announce.description %} selected {% endif %} value ="{{ public_announce.description }}" >{{ public_announce.description }}</option>
+		{% endfor %}
+	</select>
+
+  </div>
+
+
+
+  <div class="column">
+    <label>Bloomberg ID</label><br>
+	<input type = "text" name = "bloomberg_id" value = "{{ ind.Ident_Bloomberg }}"><br><br>
+	<label>Client Name</label><br>
+	<select name="client_name">
+		<!--<option value={{ ind.Client_Name }}>{{ ind.Client_Name }}</option>-->
+		{% for client in client_name %}
+			<option {% if ind.Client_Name_id|slugify == client.code %} selected {% endif %} value ="{{ client.code }}" >{{ client.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Index Version ID</label><br>
+	<input type = "text" name = "index_version_id" value = "{{ ind.Ind_Ver_ID }}">
+	<br><br>
+	<label>Data Platform</label><br>
+	<input type = "text" name = "data_platform" value = "{{ ind.Data_Platform }}">
+	<br><br>
+	<label>Type of Index</label><br>
+	<select name="type_index">
+		<!--<option value={{ ind.Type_of_Ind }}>{{ ind.Type_of_Ind }}</option>-->
+		{% for type_ind in type_of_Ind %}
+			<option {% if ind.Type_of_Ind == type_ind.description %} selected {% endif %} value ="{{ type_ind.description }}" >{{ type_ind.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Rebalance</label><br>
+	<select id="dd2" name="rebalance" onchange="configureDropDownLists(this,document.getElementById('dd22'))">
+		<!--<option value={{ ind.Rebalance }}>{{ ind.Rebalance }}</option>-->
+		{% for rebalanc in rebalance %}
+			<option {% if ind.Rebalance == rebalanc.description %} selected {% endif %}  value ="{{ rebalanc.description }}" >{{ rebalanc.description }}</option>
+		{% endfor %}
+	</select>
+<select id="dd22">
+	<option value={{ ind.rebalance_month }}>{{ ind.rebalance_month }}</option>
+</select>
+<br><br>
+	<label>Theme Review</label><br>
+	<select name="theme_Review">
+		<!--<option value={{ ind.Theme_Review }}>{{ ind.Theme_Review }}</option>-->
+		{% for theme_Rev in theme_Review %}
+			<option {% if ind.Theme_Review == theme_Rev.description %} selected {% endif %} value ="{{ theme_Rev.description }}" >{{ theme_Rev.description }}</option>
+		{% endfor %}
+	</select>
+		<br><br>
+	<label>Effective Date</label><br>
+	<select name="effective_date">
+		<!--<option value={{ ind.Effective_Date  }}>{{ ind.Effective_Date  }}</option>-->
+		{% for eff_date in effec_Date %}
+			<option {% if ind.Theme_Review == theme_Rev.description %} selected {% endif %} value ="{{ eff_date.description }}">{{ eff_date.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Preliminary Communication Date</label><br>
+	<select name="pre_comm_date">
+		<!--<option value={{ ind.Prelim_Comm_Date }}>{{ ind.Prelim_Comm_Date }}</option>-->
+		{% for pre_comm_date in prelim_Comm_Date %}
+			<option {% if ind.Prelim_Comm_Date == pre_comm_date.description %} selected {% endif %}  value ="{{ pre_comm_date.description }}" >{{ pre_comm_date.description }}</option>
+		{% endfor %}
+	</select>
+
+	<br><br>
+	<label>Client Communication Date</label><br>
+	<select name="client_Comm">
+		<!--<option value={{ ind.Client_Comm_Date }}>{{ ind.Client_Comm_Date }}</option>-->
+		{% for client_Com in client_Comm %}
+			<option {% if ind.Client_Comm_Date == client_Com.description %} selected {% endif %} value ="{{ client_Com.description }}" >{{ client_Com.description }}</option>
+		{% endfor %}
+	</select>
+  </div>
+
+
+
+
+  <div class="column">
+  <label>Thomson Reuters ID</label>
+  <input type = "text" name = "thomson_id" value = "{{ ind.Ident_Reuters }}"><br><br>
+	<label>Index style</label><br>
+	<select name="index_Style">
+		<!--<option value={{ ind.Ind_Sty }}>{{ ind.Ind_Sty }}</option>-->
+		{% for ind_Styl in ind_Sty %}
+			<option {% if ind.Ind_Sty == ind_Styl.description %} selected {% endif %} value ="{{ ind_Styl.description }}" >{{ ind_Styl.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Calculation</label><br>
+	<select name="calculation">
+		<!--<option value={{ ind.Calc }}>{{ ind.Calc }}</option>-->
+		{% for calcul in cal %}
+			<option {% if ind.Calc == calcul.description %} selected {% endif %} value ="{{ calcul.description }}" >{{ calcul.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Data Vendors</label><br>
+	<input type = "text" name = "data_vendors" value="{{ ind.Data_Vendors }}">
+	<br><br>
+	<label>Product Status</label><br>
+	<select name="prod_Status">
+		<!--<option value={{ ind.Product_Status }}>{{ ind.Product_Status }}</option>-->
+		{% for prod_St in prod_Stat %}
+		<option {% if ind.Product_Status == prod_St.description %} selected {% endif %} value ="{{ prod_St.description }}" >{{ prod_St.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label>Review</label><br>
+	<select id="dd3" name="review" onchange="configureDropDownLists(this,document.getElementById('dd32'))">
+		<!--<option value={{ ind.Review }}>{{ ind.Review }}</option>-->
+		{% for rev in review %}
+		<option {% if ind.Review == rev.description %} selected {% endif %} value ="{{ rev.description }}" >{{ rev.description }}</option>
+		{% endfor %}
+	</select>
+<select id="dd32" name="review_month">
+	<option value="{{ ind.review_month }}">{{ ind.review_month}}</option>
+</select>
+	<br><br>
+	<label>Selection Date – Cycle 1</label><br>
+	<select name="selec_Date_Cyc_1">
+		<!--<option value={{ ind.Selection_Date_Cycle_1 }}>{{ ind.Selection_Date_Cycle_1 }}</option>-->
+		{% for sel_Date_Cyc1 in selec_Date_Cyc_1 %}
+			<option {% if ind.Selection_Date_Cycle_1 == sel_Date_Cyc1.description %} selected {% endif %}  value ="{{ sel_Date_Cyc1.description }}" >{{ sel_Date_Cyc1.description }}</option>
+		{% endfor %}
+	</select>
+	<br><br>
+	<label name="">Selection Date - Cycle 2</label><br>
+	<select name="selec_Date_Cyc_2">
+		<!--<option value={{ ind.Selection_Date_Cycle_2 }}>{{ ind.Selection_Date_Cycle_2 }}</option>-->
+		{% for sel_Date_Cyc2 in selec_Date_Cyc_2 %}
+			<option {% if ind.Selection_Date_Cycle_2 == sel_Date_Cyc2.description %} selected {% endif %} value ="{{ sel_Date_Cyc2.description }}" >{{ sel_Date_Cyc2.description }}</option>
+		{% endfor %}
+	</select>
+		<br><br>
+	<label>Weights/Share Freeze Date</label><br>
+	<select name="weights_Share_Freeze">
+		<!--<option value={{ ind.Weights_Share_Freeze_Date }}>{{ ind.Weights_Share_Freeze_Date }}</option>-->
+		{% for w_Share_Freeze in weights_Share_Freeze %}
+			<option {% if ind.Weights_Share_Freeze_Date == w_Share_Freeze.description %} selected {% endif %} value ="{{ w_Share_Freeze.description }}" >{{ w_Share_Freeze.description }}</option>
+		{% endfor %}
+	</select>
+	  <br><br>
+	  <label>Communication to Calculation Agent</label>
+	  <select name="comm_to_Calc_Agent">
+		  <!--<option value={{ ind.Comm_to_Calc_Agent }}>{{ ind.Comm_to_Calc_Agent }}</option>-->
+		  {% for c_to_Calc_Agent in comm_to_Calc_Agent %}
+		       <option {% if ind.Comm_to_Calc_Agent == c_to_Calc_Agent.description %} selected {% endif %} value ="{{ c_to_Calc_Agent.description }}" >{{ c_to_Calc_Agent.description }}</option>
+		  {% endfor %}
+	  </select>
+  </div>
+</div>
+
+<input type="submit" id="btn_reg_ind" name="register" value="UPDATE INDEX" >
+
+</form>
+	{% endfor %}
+</div>
+
+{% else %}
+	<div id = elementID>
+	<div class="row">
+
+		<div class="cal_column">
+		<p>You are not logged in</p>
+		<a href="{% url 'login' %}">login</a>
+		</div>
+	</div>
+	</div>
+{% endif %}
+{% endblock %}
+

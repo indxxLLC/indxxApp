@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Index List{% endblock %}
+{% load static %}
+{% block content %}
+<div class="topnav">
+	
+	<a href = "{% url 'equalweight' %}">Equal Weight</a>
+	<a class="active"  href="{% url 'ulcapweight' %}">Upper and Lower cap</a>
+	<a href = "{% url 'ulcapagweight' %}">Upper/Lower Cap And Aggregate</a>
+	<!--<a onclick = "removeid()">About</a>-->
+	<div class="topnav-right">
+	<!--<a href="{% url 'back' %}">Back</a>-->
+	<a href="#">Hi </a>
+	<a href="#">Logout</a>
+	</div>
+</div>
+<div id = "elementID">
+
+<div class="mainContainer">
+<div class="gridDiv">
+<table class="table table-striped" id = "testTable">
+	<label class="label-heading">Index Info</label>	
+	<tbody>
+	<form id="WCForm" name="WCForm" action="{% url 'ulcapweightpost' %}"  method="post" role="form" enctype="multipart/form-data">
+	{% csrf_token %}
+	
+	<div class="row">
+
+		<div class="column"> 
+		<label>Upper Cap Value <span></span></label><br>
+		<input type="text" name="upper_cap" id="upper_cap"><br/>
+		</div>
+		
+		<div class="column"> 
+		<label>Lower Cap Value <span></span></label><br>
+		<input type="text" name="lower_cap" id="lower_cap"><br/>
+		</div>
+		
+		<div class="column"> 
+		<label>Upload File <span>*</span></label><br>
+		<input type="file" name="upload_file" id="upload_file" accept=".csv" required>
+		</div>
+		
+		<div class="column"> 
+		<label></label><br>
+		<div onclick="weight_ulag_validation()" class="nextback">Weight Calculate</div>
+		</div>
+	</div>
+	
+	</form>
+	</tbody>
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

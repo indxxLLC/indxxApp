@@ -1,0 +1,26 @@
+<!-- templates/registration/login.html -->
+ <!--
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Created Date: 08-04-2019
+ * Modified Date: dd-mm-yyyy
+ * Licensed under : Self
+ --->
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+{% if request.session.is_authentication %}
+
+{% else %}
+	<h2>Login</h2>
+	<form class="loginform" method="post">
+	  {% csrf_token %}
+	  {{ form.as_p }}
+	  <button type="submit">Login</button>
+	</form>
+{% endif %}
+{% endblock %}

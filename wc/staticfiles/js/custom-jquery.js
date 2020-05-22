@@ -1,0 +1,2560 @@
+/*!
+ * Version : 1.0
+ * Project: Calendar Automation
+ * Copyright : Indxx Capital Management
+ * Author: Pavan Rajput
+ * Author: 08-04-2019
+ * Licensed under : Self
+ */
+
+function showDiv(divId, element)
+{ 
+    document.getElementById(divId).style.display = element.value == 'Thematic' ? 'block' : 'none';
+}
+
+function showEtfDate(lanched_date, element)
+{ 
+    document.getElementById(lanched_date).style.display = element.value == 'Yes' ? 'block' : 'none';
+}
+
+function showInput(inputId, element)
+{ 
+    document.getElementById(inputId).style.display = element.value != '' ? 'none' : 'block';
+
+}
+function showCalAgent(divId, element)
+{
+    document.getElementById(divId).style.display = element.value == 'Others' ? 'block' : 'none';
+}
+function Priordays(divId, element)
+{
+    document.getElementById(divId).style.display = element.value == '2' ? 'block' : 'none';
+
+}
+function Ann_Priordays(divId, element)
+{
+document.getElementById(divId).style.display = element.value == '3' ? 'block' : 'none';
+}
+function Sel2_Priordays(divId, element)
+{
+document.getElementById(divId).style.display = element.value == '7' ? 'block' : 'none';
+}
+
+function Freeze_Priordays(divId, element)
+{
+document.getElementById(divId).style.display = element.value == '6' ? 'block' : 'none';
+}
+
+function datevalidation(inputId,element)
+{
+  date1 = document.getElementById(inputId);
+  if(date1.value=="" && element.value!=""){
+   alert("Please enter the from date");
+   element.value="";
+  }
+  if(date1.value > element.value){
+   alert("To date can not be less than From date");
+   element.value="";
+  }
+}
+function datecheck(inputId,element)
+{
+  date1 = document.getElementById(inputId);
+  if(date1.value < element.value){
+   alert("Date should be less than effective date");
+   element.value="";
+  }
+}
+function daycheck(element)
+{
+ if(element.value<1){
+  alert("Number of days should be positive");
+  element.value="";
+ }
+}
+function Colorchange(x,element)
+{
+  if(element.value=='2'){
+  document.getElementById(x).style.backgroundColor = "#ff3333";
+  }
+  if(element.value=='3'){
+  document.getElementById(x).style.backgroundColor = "#bfff80";
+  }
+  if(element.value=='1'){
+  document.getElementById(x).style.backgroundColor = '';
+  }
+
+}
+function showTab1()
+
+{
+
+
+                $("#bottom").removeClass("showDIV");
+
+                $("#bottom1").removeClass("showDIV");
+
+                $("#bottom2").removeClass("showDIV");
+
+                $("#bottom").addClass("none");
+
+                $("#bottom1").addClass("none");
+
+                $("#bottom2").addClass("none");
+
+                $("#top").removeClass("none");
+
+                $("#btns").removeClass("showDIV");
+
+                $("#btns").addClass("none");
+
+                $("#top").addClass("showDIV");
+
+ 
+
+}
+
+function showTab2()
+
+{           var check2 = document.getElementById('check2');
+            var check3 = document.getElementById('check3');
+            var check1 = document.getElementById('check1');
+            var flag=0;
+            if(check1.checked==false && check2.checked==false && check3.checked==false)
+            {
+            alert("Please select one of the checkbox");
+            flag=1;
+             $("#bottom").removeClass("showDIV");
+
+                $("#bottom1").removeClass("showDIV");
+
+                $("#bottom2").removeClass("showDIV");
+
+                $("#bottom").addClass("none");
+
+                $("#bottom1").addClass("none");
+
+                $("#bottom2").addClass("none");
+
+                $("#top").removeClass("none");
+
+                $("#btns").removeClass("showDIV");
+
+                $("#btns").addClass("none");
+
+                $("#top").addClass("showDIV");
+            }
+            var idx_name = document.getElementById('index_name');
+            var cl_name = document.getElementById('client_name');
+            var idx_style = document.getElementById('index_Style');
+            var cal = document.getElementById('calculation');
+            var cal_ag = document.getElementById('cal_agent');
+             var con_type = document.getElementById('contract_Type');
+            var ty_idx = document.getElementById('type_index');
+            var prd_status = document.getElementById('prod_Status');
+            var etf = document.getElementById('etf_Launched');
+            var the_rev = document.getElementById('theme_Review');
+            var lv_date = document.getElementById('live_date');
+            var back_date = document.getElementById('backtest_date');
+            var etf_date = document.getElementById('lanched_date');
+            var et_date = document.getElementById('etf_date');
+            var cal_ag_dis = document.getElementById('cal_agent_name');
+            var cal_ag_name = document.getElementById('cal_agent_des');
+            if(lv_date.value < back_date.value)
+            {
+              alert("Index Live date can't be less than Backtest date");
+              flag=1;
+                      $("#bottom").removeClass("showDIV");
+
+                $("#bottom1").removeClass("showDIV");
+
+                $("#bottom2").removeClass("showDIV");
+
+                $("#bottom").addClass("none");
+
+                $("#bottom1").addClass("none");
+
+                $("#bottom2").addClass("none");
+
+                $("#top").removeClass("none");
+
+                $("#btns").removeClass("showDIV");
+
+                $("#btns").addClass("none");
+
+                $("#top").addClass("showDIV");
+            }
+            if((etf_date.style.display == 'block') && (et_date.value < lv_date.value))
+            {
+              alert("ETF Launch date can't be less than Index Live date");
+              flag=1;
+                      $("#bottom").removeClass("showDIV");
+
+                $("#bottom1").removeClass("showDIV");
+
+                $("#bottom2").removeClass("showDIV");
+
+                $("#bottom").addClass("none");
+
+                $("#bottom1").addClass("none");
+
+                $("#bottom2").addClass("none");
+
+                $("#top").removeClass("none");
+
+                $("#btns").removeClass("showDIV");
+
+                $("#btns").addClass("none");
+
+                $("#top").addClass("showDIV");
+            }
+            if((etf_date.style.display == 'block') && (et_date.value < back_date.value))
+            {
+              alert("ETF Launch date can't be less than Backtest date");
+              flag=1;
+                      $("#bottom").removeClass("showDIV");
+
+                $("#bottom1").removeClass("showDIV");
+
+                $("#bottom2").removeClass("showDIV");
+
+                $("#bottom").addClass("none");
+
+                $("#bottom1").addClass("none");
+
+                $("#bottom2").addClass("none");
+
+                $("#top").removeClass("none");
+
+                $("#btns").removeClass("showDIV");
+
+                $("#btns").addClass("none");
+
+                $("#top").addClass("showDIV");
+            }
+            if ((idx_name != null && idx_name.value == '') || (etf_date.style.display == 'block' && et_date.value == '')
+            || (cl_name != null && cl_name.value == '') || (idx_style != null && idx_style.value == '') || (cal_ag_dis.style.display == 'block' && cal_ag_name.value == '')
+            || (cal != null && cal.value == '') || (cal_ag != null && cal_ag.value == '') ||(con_type != null && con_type.value == '')
+            ||(ty_idx != null && ty_idx.value == '') || (prd_status != null && prd_status.value == '') || (etf != null && etf.value == '')
+            ||(the_rev != null && the_rev.value == '') || (back_date != null && back_date.value == '') || (lv_date != null && lv_date.value == '') ) {
+                      alert("Please fill all the mandatory fields");
+                      flag=1;
+                      $("#bottom").removeClass("showDIV");
+
+                $("#bottom1").removeClass("showDIV");
+
+                $("#bottom2").removeClass("showDIV");
+
+                $("#bottom").addClass("none");
+
+                $("#bottom1").addClass("none");
+
+                $("#bottom2").addClass("none");
+
+                $("#top").removeClass("none");
+
+                $("#btns").removeClass("showDIV");
+
+                $("#btns").addClass("none");
+
+                $("#top").addClass("showDIV");
+          }
+            if(flag==0){
+                $("#top").removeClass("showDIV");
+
+                $("#bottom1").removeClass("showDIV");
+
+                $("#bottom2").removeClass("showDIV");
+
+                $("#btns").removeClass("showDIV");
+
+                $("#btns").addClass("none");
+
+                $("#top").addClass("none");
+
+                $("#bottom1").addClass("none");
+
+                $("#bottom2").addClass("none");
+
+                $("#bottom").removeClass("none");
+
+                $("#bottom").addClass("showDIV");
+                }
+
+ 
+
+               
+
+}
+
+ 
+
+function showTab3()
+{
+
+	var check1 = document.getElementById('check1');
+	var choice1 = document.getElementById('choice1');
+	var choice2 = document.getElementById('choice2');
+	
+	var reconstitution = document.getElementById('dd1');
+	var reconst_month = document.getElementById('dd12');
+	var cmp_date = document.getElementById('cmp_Date');
+	var eff_date = document.getElementById('effective_date');
+	var sel_date = document.getElementById('selec_Date_Cyc_2');
+
+	var fre_date = document.getElementById('weights_Share_Freeze');
+	//var ind_date = document.getElementById('ind_Comm_Date');
+	var ann_date = document.getElementById('public_Announcement');
+	var cl_date = document.getElementById('client_Comm');
+	var qc_date = document.getElementById('qc_date');
+	var com_cal = document.getElementById('comm_to_Calc_Agent');
+	var sel_1_display = document.getElementById('Cycle_11');
+	var sel_1_date = document.getElementById('selec_Date_Cyc_1');
+	var sel_1 = document.getElementById('sel1_prior_days');
+	var sel_2 = document.getElementById('sel2_prior_days');
+	var cmp = document.getElementById('cmp_prior_days');
+	var pre = document.getElementById('pre_prior_days');
+	//var icom = document.getElementById('icom_prior_days');
+	var fre = document.getElementById('fre_prior_days');
+	var qc = document.getElementById('qc_prior_days');
+	var ann = document.getElementById('ann_prior_days')
+	var cl = document.getElementById('cl_prior_days')
+	var cal_ag = document.getElementById('cal_ag_prior_days')
+	if(choice1.checked){
+	  if (check1.checked ==true){
+	  if ((reconstitution!= null && reconstitution.value == '') || (reconst_month!= null && reconst_month.value == '')
+	   || (sel_1_display.style.display == 'block' && sel_1_date.value == '') ||(qc_date!= null && qc_date.value == '')
+	  ||(cmp_date!= null && cmp_date.value == '') || (eff_date!= null && eff_date.value == '') ||(sel_date!= null && sel_date.value == '')
+	  || (fre_date!= null && fre_date.value == '') 
+	   ||(ann_date!= null && ann_date.value == '') || (cl_date!= null && cl_date.value == '') || (com_cal!= null && com_cal.value == '')
+	   || (qc.style.display == 'block' && qc.value == '')||(ann.style.display == 'block' && ann.value == '') || (cl.style.display == 'block' && cl.value == '') || (cal_ag.style.display == 'block' && cal_ag.value == '')
+	  || (fre.style.display == 'block' && fre.value == '') 
+	  //|| (icom.style.display == 'block' && icom.value == '')
+	   ||(pre.style.display == 'block' && pre.value == '') || (cmp.style.display == 'block' && cmp.value == '') || (sel_1.style.display == 'block' && sel_1.value == '')
+	   ||(sel_2.style.display == 'block' && sel_2.value == ''))
+	   {
+		 alert("Please fill all the fields for reconstitution info");
+	   }
+	   else{
+		$("#top").removeClass("showDIV");
+
+		$("#bottom").removeClass("showDIV");
+
+		$("#bottom2").removeClass("showDIV");
+
+		$("#btns").removeClass("showDIV");
+
+		$("#btns").addClass("none");
+
+		$("#top").addClass("none");
+
+		$("#bottom").addClass("none");
+
+		$("#bottom2").addClass("none");
+
+		$("#bottom1").removeClass("none");
+
+		$("#bottom1").addClass("showDIV");
+	   }
+
+
+	  }
+	  else
+	  {
+		$("#top").removeClass("showDIV");
+
+		$("#bottom").removeClass("showDIV");
+
+		$("#bottom2").removeClass("showDIV");
+
+		$("#btns").removeClass("showDIV");
+
+		$("#btns").addClass("none");
+
+		$("#top").addClass("none");
+
+		$("#bottom").addClass("none");
+
+		$("#bottom2").addClass("none");
+
+		$("#bottom1").removeClass("none");
+
+		$("#bottom1").addClass("showDIV");
+		}
+
+
+	}
+	else{
+		var cmp_date = document.getElementById('mnl_cmp_Date');
+		var eff_date = document.getElementById('mnl_eff_date');
+		var sel_date = document.getElementById('mnl_sel2_date');
+		var fre_date = document.getElementById('mnl_freeze_date');
+		//var ind_date = document.getElementById('mnl_ind_Comm_date');
+		var ann_date = document.getElementById('mnl_pb_announce_date');
+		var cl_date = document.getElementById('mnl_client_comm_date');
+		var qc_date = document.getElementById('mnl_qc_date');
+		var com_cal = document.getElementById('mnl_comm_cal_date');
+		var sel_1_display = document.getElementById('Cycle_11');
+		var sel_1_date = document.getElementById('mnl_sel1_date')
+
+	 if (check1.checked ==true){
+		  if ((reconstitution!= null && reconstitution.value == '') || (reconst_month!= null && reconst_month.value == '')
+		   || (sel_1_display.style.display == 'block' && sel_1_date.value == '') ||(qc_date!= null && qc_date.value == '')
+		  ||(cmp_date!= null && cmp_date.value == '') || (eff_date!= null && eff_date.value == '') ||(sel_date!= null && sel_date.value == '')
+		 || (fre_date!= null && fre_date.value == '') 
+		   ||(ann_date!= null && ann_date.value == '') || (cl_date!= null && cl_date.value == '') || (com_cal!= null && com_cal.value == ''))
+		   {
+			 alert("Please fill all the fields for reconstitution info");
+		   }
+		   else{
+			$("#top").removeClass("showDIV");
+
+			$("#bottom").removeClass("showDIV");
+
+			$("#bottom2").removeClass("showDIV");
+
+			$("#btns").removeClass("showDIV");
+
+			$("#btns").addClass("none");
+
+			$("#top").addClass("none");
+
+			$("#bottom").addClass("none");
+
+			$("#bottom2").addClass("none");
+
+			$("#bottom1").removeClass("none");
+
+			$("#bottom1").addClass("showDIV");
+		   }
+
+
+		  }
+		  else
+		  {
+			$("#top").removeClass("showDIV");
+
+			$("#bottom").removeClass("showDIV");
+
+			$("#bottom2").removeClass("showDIV");
+
+			$("#btns").removeClass("showDIV");
+
+			$("#btns").addClass("none");
+
+			$("#top").addClass("none");
+
+			$("#bottom").addClass("none");
+
+			$("#bottom2").addClass("none");
+
+			$("#bottom1").removeClass("none");
+
+			$("#bottom1").addClass("showDIV");
+			}
+	}
+}
+
+function showTab4()
+{
+            var check1 = document.getElementById('check1');
+            var choice1 = document.getElementById('choice1');
+            var choice2 = document.getElementById('choice2');
+            var reconstitution = document.getElementById('dd1');
+            var reconst_month = document.getElementById('dd12');
+            var cmp_date = document.getElementById('cmp_Date');
+            var eff_date = document.getElementById('effective_date');
+            var sel_date = document.getElementById('selec_Date_Cyc_2');
+            //var pre_date = document.getElementById('pre_comm_date');
+            var fre_date = document.getElementById('weights_Share_Freeze');
+            //var ind_date = document.getElementById('ind_Comm_Date');
+            var ann_date = document.getElementById('public_Announcement');
+            var qc_date = document.getElementById('qc_date');
+            var cl_date = document.getElementById('client_Comm');
+			var com_cal = document.getElementById('comm_to_Calc_Agent');
+			var sel_1_display = document.getElementById('Cycle_11');
+            var sel_1_date = document.getElementById('selec_Date_Cyc_1')
+            var sel_1 = document.getElementById('sel1_prior_days');
+             var sel_2 = document.getElementById('sel2_prior_days');
+            var cmp = document.getElementById('cmp_prior_days');
+            var pre = document.getElementById('pre_prior_days');
+            //var icom = document.getElementById('icom_prior_days');
+            var fre = document.getElementById('fre_prior_days');
+            var qc = document.getElementById('qc_prior_days');
+            var ann = document.getElementById('ann_prior_days')
+            var cl = document.getElementById('cl_prior_days')
+            var cal_ag = document.getElementById('cal_ag_prior_days')
+
+			var check2 = document.getElementById('check2');
+			var rebalance = document.getElementById('dd2');
+            var rebalance_month = document.getElementById('dd22');
+            var eff_date_rebal = document.getElementById('effective_date_rebal');
+            var pre_date_rebal = document.getElementById('qc_Date_rebal');
+            var fre_date_rebal = document.getElementById('weights_Share_Freeze_rebal');
+            var ann_date_rebal = document.getElementById('public_Announcement_rebal');
+            var cl_date_rebal = document.getElementById('client_Comm_rebal');
+			var com_cal_rebal = document.getElementById('comm_to_Calc_Agent_rebal');
+            var fre_rebal = document.getElementById('fre_prior_days_rebal');
+            var qc_rebal = document.getElementById('qc_prior_days_rebal');
+            var ann_rebal = document.getElementById('ann_prior_days_rebal')
+            var cl_rebal = document.getElementById('cl_prior_days_rebal')
+            var cal_ag_rebal = document.getElementById('cal_ag_prior_days_rebal')
+			
+            
+			var flag=0;
+			if(choice1.checked){
+			if (check1.checked==true){
+              if ((reconstitution!= null && reconstitution.value == '') || (reconst_month!= null && reconst_month.value == '')
+              || (sel_1_display.style.display == 'block' && sel_1_date.value == '')
+              ||(cmp_date!= null && cmp_date.value == '') || (eff_date!= null && eff_date.value == '') ||(sel_date!= null && sel_date.value == '')
+              || (fre_date!= null && fre_date.value == '') 
+               ||(ann_date!= null && ann_date.value == '') || (cl_date!= null && cl_date.value == '') || (com_cal!= null && com_cal.value == '')
+               || (qc.style.display == 'block' && qc.value == '')||(ann.style.display == 'block' && ann.value == '') || (cl.style.display == 'block' && cl.value == '') || (cal_ag.style.display == 'block' && cal_ag.value == '')
+              || (fre.style.display == 'block' && fre.value == '') 
+			  //|| (icom.style.display == 'block' && icom.value == '')
+               ||(pre.style.display == 'block' && pre.value == '') || (cmp.style.display == 'block' && cmp.value == '') || (sel_1.style.display == 'block' && sel_1.value == '')
+               ||(sel_2.style.display == 'block' && sel_2.value == ''))
+               {
+                 alert("Please fill all the fields for reconstitution info");
+                 flag=1;
+               }
+               }
+            if (check2.checked==true){
+              if ((rebalance!= null && rebalance.value == '') || (rebalance_month!= null && rebalance_month.value == '')
+              || (eff_date_rebal!= null && eff_date_rebal.value == '')
+              ||(pre_date_rebal!= null && pre_date_rebal.value == '') || (fre_date_rebal!= null && fre_date_rebal.value == '')
+
+               ||(ann_date_rebal!= null && ann_date_rebal.value == '') || (cl_date_rebal!= null && cl_date_rebal.value == '')
+                || (com_cal_rebal!= null && com_cal_rebal.value == '')
+                || (qc_rebal.style.display == 'block' && qc_rebal.value == '')
+				||(ann_rebal.style.display == 'block' && ann_rebal.value == '') 
+				|| (cl_rebal.style.display == 'block' && cl_rebal.value == '') ||
+                (cal_ag_rebal.style.display == 'block' && cal_ag_rebal.value == '')
+              || (fre_rebal.style.display == 'block' && fre_rebal.value == ''))
+               {
+                 alert("Please fill all the fields for rebalancing info");
+                 flag=1;
+               }
+               }
+			   
+			 
+			   }
+            else{
+            var cmp_date = document.getElementById('mnl_cmp_Date');
+            var eff_date = document.getElementById('mnl_eff_date');
+            var sel_date = document.getElementById('mnl_sel2_date');
+            //var pre_date = document.getElementById('mnl_prelim_date');
+            var fre_date = document.getElementById('mnl_freeze_date');
+            //var ind_date = document.getElementById('mnl_ind_Comm_date');
+            var ann_date = document.getElementById('mnl_pb_announce_date');
+            var cl_date = document.getElementById('mnl_client_comm_date');
+            var qc_date = document.getElementById('mnl_qc_date');
+			var com_cal = document.getElementById('mnl_comm_cal_date');
+			var sel_1_display = document.getElementById('Cycle_11');
+            var sel_1_date = document.getElementById('mnl_sel1_date')
+            var eff_date_rebal = document.getElementById('mnl_eff_date_rebal');
+            var pre_date_rebal = document.getElementById('mnl_qc_date_rebal');
+            var fre_date_rebal = document.getElementById('mnl_freeze_date_rebal');
+            var ann_date_rebal = document.getElementById('mnl_pb_announce_date_rebal');
+            var cl_date_rebal = document.getElementById('mnl_client_comm_date_rebal');
+			var com_cal_rebal = document.getElementById('mnl_comm_cal_date_rebal');
+			
+             
+			 if (check1.checked==true){
+              if ((reconstitution!= null && reconstitution.value == '') || (reconst_month!= null && reconst_month.value == '')
+              || (sel_1_display.style.display == 'block' && sel_1_date.value == '')
+              ||(cmp_date!= null && cmp_date.value == '') || (eff_date!= null && eff_date.value == '') ||(sel_date!= null && sel_date.value == '')
+              || (fre_date!= null && fre_date.value == '') 
+               ||(ann_date!= null && ann_date.value == '') || (cl_date!= null && cl_date.value == '') || (com_cal!= null && com_cal.value == ''))
+               {
+                 alert("Please fill all the fields for reconstitution info");
+                 flag=1;
+               }
+               }
+            if (check2.checked==true){
+              if ((rebalance!= null && rebalance.value == '') || (rebalance_month!= null && rebalance_month.value == '')
+              || (eff_date_rebal!= null && eff_date_rebal.value == '')
+              ||(pre_date_rebal!= null && pre_date_rebal.value == '') || (fre_date_rebal!= null && fre_date_rebal.value == '')
+
+               ||(ann_date_rebal!= null && ann_date_rebal.value == '') || (cl_date_rebal!= null && cl_date_rebal.value == '')
+                || (com_cal_rebal!= null && com_cal_rebal.value == ''))
+               {
+                 alert("Please fill all the fields for rebalancing info");
+                 flag=1;
+               }
+               }
+			 
+               }
+            if(flag==0){
+                $("#top").removeClass("showDIV");
+
+                $("#bottom").removeClass("showDIV");
+
+                $("#bottom1").removeClass("showDIV");
+
+                $("#btns").removeClass("none");
+
+                $("#btns").addClass("showDIV");
+
+                $("#top").addClass("none");
+
+                $("#bottom").addClass("none")
+
+                $("#bottom1").addClass("none");
+
+                $("#bottom2").removeClass("none");
+
+                $("#bottom2").addClass("showDIV");
+                }
+
+
+}
+
+function showTab5()
+{
+            var check1 = document.getElementById('check1');
+            var choice1 = document.getElementById('choice1');
+            var choice2 = document.getElementById('choice2');
+            var reconstitution = document.getElementById('dd1');
+            var reconst_month = document.getElementById('dd12');
+            var cmp_date = document.getElementById('cmp_Date');
+            var eff_date = document.getElementById('effective_date');
+            var sel_date = document.getElementById('selec_Date_Cyc_2');
+            //var pre_date = document.getElementById('pre_comm_date');
+            var fre_date = document.getElementById('weights_Share_Freeze');
+            //var ind_date = document.getElementById('ind_Comm_Date');
+            var ann_date = document.getElementById('public_Announcement');
+            var qc_date = document.getElementById('qc_date');
+            var cl_date = document.getElementById('client_Comm');
+			var com_cal = document.getElementById('comm_to_Calc_Agent');
+			var sel_1_display = document.getElementById('Cycle_11');
+            var sel_1_date = document.getElementById('selec_Date_Cyc_1')
+            var sel_1 = document.getElementById('sel1_prior_days');
+             var sel_2 = document.getElementById('sel2_prior_days');
+            var cmp = document.getElementById('cmp_prior_days');
+            var pre = document.getElementById('pre_prior_days');
+            //var icom = document.getElementById('icom_prior_days');
+            var fre = document.getElementById('fre_prior_days');
+            var qc = document.getElementById('qc_prior_days');
+            var ann = document.getElementById('ann_prior_days')
+            var cl = document.getElementById('cl_prior_days')
+            var cal_ag = document.getElementById('cal_ag_prior_days')
+
+			var check2 = document.getElementById('check2');
+			var rebalance = document.getElementById('dd2');
+            var rebalance_month = document.getElementById('dd22');
+            var eff_date_rebal = document.getElementById('effective_date_rebal');
+            var pre_date_rebal = document.getElementById('qc_Date_rebal');
+            var fre_date_rebal = document.getElementById('weights_Share_Freeze_rebal');
+            var ann_date_rebal = document.getElementById('public_Announcement_rebal');
+            var cl_date_rebal = document.getElementById('client_Comm_rebal');
+			var com_cal_rebal = document.getElementById('comm_to_Calc_Agent_rebal');
+            var fre_rebal = document.getElementById('fre_prior_days_rebal');
+            var qc_rebal = document.getElementById('qc_prior_days_rebal');
+            var ann_rebal = document.getElementById('ann_prior_days_rebal')
+            var cl_rebal = document.getElementById('cl_prior_days_rebal')
+            var cal_ag_rebal = document.getElementById('cal_ag_prior_days_rebal')
+			
+			
+			var check3 = document.getElementById('check3');
+			var review = document.getElementById('dd3');
+            var review_month = document.getElementById('dd32');
+            var eff_date_review = document.getElementById('effective_date_review');
+            var sel_date_cycl2_review = document.getElementById('selec_Date_Cyc_2_review');
+			var fre_review = document.getElementById('weights_Share_Freeze_review');
+			var qc_review = document.getElementById('ind_qc_date_review');
+			var ann_review = document.getElementById('public_Announcement_review');
+            var client_comm_review = document.getElementById('client_Comm_review');
+			var com_cal_ag_review = document.getElementById('comm_to_Calc_Agent_review');
+            
+            
+			var flag=0;
+			if(choice1.checked){
+			if (check1.checked==true){
+              if ((reconstitution!= null && reconstitution.value == '') || (reconst_month!= null && reconst_month.value == '')
+              || (sel_1_display.style.display == 'block' && sel_1_date.value == '')
+              ||(cmp_date!= null && cmp_date.value == '') || (eff_date!= null && eff_date.value == '') ||(sel_date!= null && sel_date.value == '')
+              || (fre_date!= null && fre_date.value == '') 
+               ||(ann_date!= null && ann_date.value == '') || (cl_date!= null && cl_date.value == '') || (com_cal!= null && com_cal.value == '')
+               || (qc.style.display == 'block' && qc.value == '')||(ann.style.display == 'block' && ann.value == '') || (cl.style.display == 'block' && cl.value == '') || (cal_ag.style.display == 'block' && cal_ag.value == '')
+              || (fre.style.display == 'block' && fre.value == '') 
+			  //|| (icom.style.display == 'block' && icom.value == '')
+               ||(pre.style.display == 'block' && pre.value == '') || (cmp.style.display == 'block' && cmp.value == '') || (sel_1.style.display == 'block' && sel_1.value == '')
+               ||(sel_2.style.display == 'block' && sel_2.value == ''))
+               {
+                 alert("Please fill all the fields for reconstitution info");
+                 flag=1;
+               }
+               }
+            if (check2.checked==true){
+              if ((rebalance!= null && rebalance.value == '') || (rebalance_month!= null && rebalance_month.value == '')
+              || (eff_date_rebal!= null && eff_date_rebal.value == '')
+              ||(pre_date_rebal!= null && pre_date_rebal.value == '') || (fre_date_rebal!= null && fre_date_rebal.value == '')
+
+               ||(ann_date_rebal!= null && ann_date_rebal.value == '') || (cl_date_rebal!= null && cl_date_rebal.value == '')
+                || (com_cal_rebal!= null && com_cal_rebal.value == '')
+                || (qc_rebal.style.display == 'block' && qc_rebal.value == '')
+				||(ann_rebal.style.display == 'block' && ann_rebal.value == '') 
+				|| (cl_rebal.style.display == 'block' && cl_rebal.value == '') ||
+                (cal_ag_rebal.style.display == 'block' && cal_ag_rebal.value == '')
+              || (fre_rebal.style.display == 'block' && fre_rebal.value == ''))
+               {
+                 alert("Please fill all the fields for rebalancing info");
+                 flag=1;
+               }
+               }
+			   
+			  
+			  if (check3.checked==true){
+              if ((review!= null && review.value == '') || (review_month!= null && review_month.value == '')
+              || (eff_date_review!= null && eff_date_review.value == '')
+              ||(sel_date_cycl2_review!= null && sel_date_cycl2_review.value == '') || (fre_review!= null && fre_review.value == '')
+
+               ||(qc_review!= null && qc_review.value == '') || (ann_review!= null && ann_review.value == '')
+                || (client_comm_review!= null && client_comm_review.value == '') || (com_cal_ag_review!= null && com_cal_ag_review.value == '')
+                )
+               {
+                 alert("Please fill all the fields for review info");
+                 flag=1;
+               }
+               }
+			   
+			   }
+            else{
+				var cmp_date = document.getElementById('mnl_cmp_Date');
+				var eff_date = document.getElementById('mnl_eff_date');
+				var sel_date = document.getElementById('mnl_sel2_date');
+				//var pre_date = document.getElementById('mnl_prelim_date');
+				var fre_date = document.getElementById('mnl_freeze_date');
+				//var ind_date = document.getElementById('mnl_ind_Comm_date');
+				var ann_date = document.getElementById('mnl_pb_announce_date');
+				var cl_date = document.getElementById('mnl_client_comm_date');
+				var qc_date = document.getElementById('mnl_qc_date');
+				var com_cal = document.getElementById('mnl_comm_cal_date');
+				var sel_1_display = document.getElementById('Cycle_11');
+				var sel_1_date = document.getElementById('mnl_sel1_date')
+				var eff_date_rebal = document.getElementById('mnl_eff_date_rebal');
+				var pre_date_rebal = document.getElementById('mnl_qc_date_rebal');
+				var fre_date_rebal = document.getElementById('mnl_freeze_date_rebal');
+				var ann_date_rebal = document.getElementById('mnl_pb_announce_date_rebal');
+				var cl_date_rebal = document.getElementById('mnl_client_comm_date_rebal');
+				var com_cal_rebal = document.getElementById('mnl_comm_cal_date_rebal');
+				
+				var eff_date_review = document.getElementById('mnl_eff_date_review');
+				var sel2_date_review = document.getElementById('mnl_sel2_date_review');
+				//var ind_Comm_date_review = document.getElementById('mnl_ind_Comm_date_review');
+				var qc_date_review = document.getElementById('mnl_qc_date_review');
+				var fre_date_review = document.getElementById('mnl_freeze_date_review');
+				var ann_date_review = document.getElementById('mnl_pb_announce_date_review');
+				var cl_com_date_review = document.getElementById('mnl_client_comm_date_review');
+				var com_cal_date_review = document.getElementById('mnl_comm_cal_date_review');
+				
+             
+			 if (check1.checked==true){
+              if ((reconstitution!= null && reconstitution.value == '') || (reconst_month!= null && reconst_month.value == '')
+              || (sel_1_display.style.display == 'block' && sel_1_date.value == '')
+              ||(cmp_date!= null && cmp_date.value == '') || (eff_date!= null && eff_date.value == '') ||(sel_date!= null && sel_date.value == '')
+              || (fre_date!= null && fre_date.value == '') 
+               ||(ann_date!= null && ann_date.value == '') || (cl_date!= null && cl_date.value == '') || (com_cal!= null && com_cal.value == ''))
+               {
+                 alert("Please fill all the fields for reconstitution info");
+                 flag=1;
+               }
+               }
+            if (check2.checked==true){
+              if ((rebalance!= null && rebalance.value == '') || (rebalance_month!= null && rebalance_month.value == '')
+              || (eff_date_rebal!= null && eff_date_rebal.value == '')
+              ||(pre_date_rebal!= null && pre_date_rebal.value == '') || (fre_date_rebal!= null && fre_date_rebal.value == '')
+               ||(ann_date_rebal!= null && ann_date_rebal.value == '') || (cl_date_rebal!= null && cl_date_rebal.value == '')
+                || (com_cal_rebal!= null && com_cal_rebal.value == ''))
+               {
+                 alert("Please fill all the fields for rebalancing info");
+                 flag=1;
+               }
+               }
+			  
+			  if (check3.checked==true){
+              if ((review!= null && review.value == '') || (review_month!= null && review_month.value == '')
+              || (eff_date_review!= null && eff_date_review.value == '')
+              ||(sel2_date_review!= null && sel2_date_review.value == '') 
+			  //|| (ind_Comm_date_review!= null && ind_Comm_date_review.value == '')
+               ||(qc_date_review!= null && qc_date_review.value == '') || (fre_date_review!= null && fre_date_review.value == '')
+                || (ann_date_review!= null && ann_date_review.value == '') || (cl_com_date_review!= null && cl_com_date_review.value == '')
+				|| (com_cal_date_review!= null && com_cal_date_review.value == ''))
+               {
+                 alert("Please fill all the fields for review info");
+                 flag=1;
+               }
+               }
+			   
+               }
+			   if(flag==0){
+				   document.getElementById("RegForm").submit();
+			   }
+            
+
+
+}
+function showRules()
+{
+	$("#selec_Date_Cyc_1").removeClass("none");
+	$("#selec_Date_Cyc_1").addClass("showDIV");
+
+	//Make sure showDates is not visible
+	$("#mnl_sel1_date").removeClass("showDIV");
+	$("#mnl_sel1_date").addClass("none");
+	/*
+	$('#dd1').css("float", "left");
+	$('#dd2').css("float", "left");
+	$('#dd3').css("float", "left");
+	
+	$("#dd12").removeClass("none");
+	$("#dd12").addClass("showDIV");
+	$('#dd12').css("float", "left");
+	
+	$("#dd22").removeClass("none");
+	$("#dd22").addClass("showDIV");
+	$('#dd22').css("float", "left");
+	
+	$("#dd32").removeClass("none");
+	$("#dd32").addClass("showDIV");
+	$('#dd32').css("float", "left");
+	*/
+	$("#cmp_Date").removeClass("none");
+	$("#cmp_Date").addClass("showDIV");
+
+    $('#cmp_prior_days').removeClass("none");
+    $('#cmp_prior_days').addClass("showDIV");
+
+	$("#mnl_cmp_date").removeClass("showDIV");
+	$("#mnl_cmp_date").addClass("none");
+
+	$("#qc_date").removeClass("none");
+	$("#qc_date").addClass("showDIV");
+
+	$("#mnl_qc_date").removeClass("showDIV");
+	$("#mnl_qc_date").addClass("none");
+
+	$("#effective_date").removeClass("none");
+	$("#effective_date").addClass("showDIV");
+
+	$("#mnl_eff_date").removeClass("showDIV");
+	$("#mnl_eff_date").addClass("none");
+
+
+	$("#selec_Date_Cyc_2").removeClass("none");
+	$("#selec_Date_Cyc_2").addClass("showDIV");
+
+	$("#mnl_sel2_date").removeClass("showDIV");
+	$("#mnl_sel2_date").addClass("none");
+
+	$("#ind_Comm_Date").removeClass("none");
+	$("#ind_Comm_Date").addClass("showDIV");
+
+	//$("#mnl_ind_Comm_date").removeClass("showDIV");
+	//$("#mnl_ind_Comm_date").addClass("none");
+
+	$("#pre_comm_date").removeClass("none");
+	$("#pre_comm_date").addClass("showDIV");
+
+	$("#mnl_prelim_date").removeClass("showDIV");
+	$("#mnl_prelim_date").addClass("none");
+
+	$("#weights_Share_Freeze").removeClass("none");
+	$("#weights_Share_Freeze").addClass("showDIV");
+
+	$("#mnl_freeze_date").removeClass("showDIV");
+	$("#mnl_freeze_date").addClass("none");
+
+	$("#public_Announcement").removeClass("none");
+	$("#public_Announcement").addClass("showDIV");
+
+	$("#mnl_pb_announce_date").removeClass("showDIV");
+	$("#mnl_pb_announce_date").addClass("none");
+
+	$("#client_Comm").removeClass("none");
+	$("#client_Comm").addClass("showDIV");
+
+	$("#mnl_client_comm_date").removeClass("showDIV");
+	$("#mnl_client_comm_date").addClass("none");
+
+	$("#comm_to_Calc_Agent").removeClass("none");
+	$("#comm_to_Calc_Agent").addClass("showDIV");
+
+	$("#mnl_comm_cal_date").removeClass("showDIV");
+	$("#mnl_comm_cal_date").addClass("none");
+
+	$("#selec_Date_Cyc_1_rebal").removeClass("none");
+	$("#selec_Date_Cyc_1_rebal").addClass("showDIV");
+
+	$("#mnl_sel1_date_rebal").removeClass("showDIV");
+	$("#mnl_sel1_date_rebal").addClass("none");
+	
+	$("#cmp_Date_rebal").removeClass("none");
+	$("#cmp_Date_rebal").addClass("showDIV");
+
+	$("#mnl_cmp_date_rebal").removeClass("showDIV");
+	$("#mnl_cmp_date_rebal").addClass("none");
+
+	$("#qc_Date_rebal").removeClass("none");
+	$("#qc_Date_rebal").addClass("showDIV");
+
+	$("#mnl_qc_date_rebal").removeClass("showDIV");
+	$("#mnl_qc_date_rebal").addClass("none");
+
+	$("#effective_date_rebal").removeClass("none");
+	$("#effective_date_rebal").addClass("showDIV");
+
+	$("#mnl_eff_date_rebal").removeClass("showDIV");
+	$("#mnl_eff_date_rebal").addClass("none");
+
+	$("#selec_Date_Cyc_2_rebal").removeClass("none");
+	$("#selec_Date_Cyc_2_rebal").addClass("showDIV");
+
+	$("#mnl_sel2_date_rebal").removeClass("showDIV");
+	$("#mnl_sel2_date_rebal").addClass("none");
+
+	$("#ind_Comm_Date_rebal").removeClass("none");
+	$("#ind_Comm_Date_rebal").addClass("showDIV");
+
+	$("#mnl_ind_Comm_date_rebal").removeClass("showDIV");
+	$("#mnl_ind_Comm_date_rebal").addClass("none");
+
+	$("#pre_comm_date_rebal").removeClass("none");
+	$("#pre_comm_date_rebal").addClass("showDIV");
+
+	$("#mnl_prelim_date_rebal").removeClass("showDIV");
+	$("#mnl_prelim_date_rebal").addClass("none");
+
+	$("#weights_Share_Freeze_rebal").removeClass("none");
+	$("#weights_Share_Freeze_rebal").addClass("showDIV");
+
+	$("#mnl_freeze_date_rebal").removeClass("showDIV");
+	$("#mnl_freeze_date_rebal").addClass("none");
+
+	$("#public_Announcement_rebal").removeClass("none");
+	$("#public_Announcement_rebal").addClass("showDIV");
+
+	$("#mnl_pb_announce_date_rebal").removeClass("showDIV");
+	$("#mnl_pb_announce_date_rebal").addClass("none");
+
+	$("#client_Comm_rebal").removeClass("none");
+	$("#client_Comm_rebal").addClass("showDIV");
+
+	$("#mnl_client_comm_date_rebal").removeClass("showDIV");
+	$("#mnl_client_comm_date_rebal").addClass("none");
+
+	$("#comm_to_Calc_Agent_rebal").removeClass("none");
+	$("#comm_to_Calc_Agent_rebal").addClass("showDIV");
+
+	$("#mnl_comm_cal_date_rebal").removeClass("showDIV");
+	$("#mnl_comm_cal_date_rebal").addClass("none");
+
+	$("#selec_Date_Cyc_1_review").removeClass("none");
+	$("#selec_Date_Cyc_1_review").addClass("showDIV");
+
+	$("#mnl_sel1_date_review").removeClass("showDIV");
+	$("#mnl_sel1_date_review").addClass("none");
+
+	$("#cmp_Date_review").removeClass("none");
+	$("#cmp_Date_review").addClass("showDIV");
+
+	$("#mnl_cmp_date_review").removeClass("showDIV");
+	$("#mnl_cmp_date_review").addClass("none");
+
+	$("#ind_qc_date_review").removeClass("none");
+	$("#ind_qc_date_review").addClass("showDIV");
+
+	$("#mnl_qc_date_review").removeClass("showDIV");
+	$("#mnl_qc_date_review").addClass("none");
+
+	$("#effective_date_review").removeClass("none");
+	$("#effective_date_review").addClass("showDIV");
+
+	$("#mnl_eff_date_review").removeClass("showDIV");
+	$("#mnl_eff_date_review").addClass("none");
+
+	$("#selec_Date_Cyc_2_review").removeClass("none");
+	$("#selec_Date_Cyc_2_review").addClass("showDIV");
+
+	$("#mnl_sel2_date_review").removeClass("showDIV");
+	$("#mnl_sel2_date_review").addClass("none");
+
+	$("#ind_Comm_Date_review").removeClass("none");
+	$("#ind_Comm_Date_review").addClass("showDIV");
+	/*
+	$("#mnl_ind_Comm_date_review").removeClass("showDIV");
+	$("#mnl_ind_Comm_date_review").addClass("none");
+	*/
+	$("#pre_comm_date_review").removeClass("none");
+	$("#pre_comm_date_review").addClass("showDIV");
+
+	$("#mnl_prelim_date_review").removeClass("showDIV");
+	$("#mnl_prelim_date_review").addClass("none");
+
+	$("#weights_Share_Freeze_review").removeClass("none");
+	$("#weights_Share_Freeze_review").addClass("showDIV");
+
+	$("#mnl_freeze_date_review").removeClass("showDIV");
+	$("#mnl_freeze_date_review").addClass("none");
+
+	$("#public_Announcement_review").removeClass("none");
+	$("#public_Announcement_review").addClass("showDIV");
+
+	$("#mnl_pb_announce_date_review").removeClass("showDIV");
+	$("#mnl_pb_announce_date_review").addClass("none");
+
+	$("#client_Comm_review").removeClass("none");
+	$("#client_Comm_review").addClass("showDIV");
+
+	$("#mnl_client_comm_date_review").removeClass("showDIV");
+	$("#mnl_client_comm_date_review").addClass("none");
+
+	$("#comm_to_Calc_Agent_review").removeClass("none");
+	$("#comm_to_Calc_Agent_review").addClass("showDIV");
+
+	$("#mnl_comm_cal_date_review").removeClass("showDIV");
+	$("#mnl_comm_cal_date_review").addClass("none");
+
+	$('#fre_prior_days_rebal').removeClass("none");
+    $('#fre_prior_days_rebal').addClass("showDIV");
+
+    $('#qc_prior_days_rebal').removeClass("none");
+    $('#qc_prior_days_rebal').addClass("showDIV");
+
+    $('#ann_prior_days_rebal').removeClass("none");
+    $('#ann_prior_days_rebal').addClass("showDIV");
+
+    $('#cl_prior_days_rebal').removeClass("none");
+    $('#cl_prior_days_rebal').addClass("showDIV");
+
+    $('#cal_ag_prior_days_rebal').removeClass("none");
+    $('#cal_ag_prior_days_rebal').addClass("showDIV");
+
+    //$('#cmp_prior_days').removeClass("none");
+    //$('#cmp_prior_days').addClass("showDIV");
+
+    //$('#sel1_prior_days').removeClass("none");
+    //$('#sel1_prior_days').addClass("showDIV");
+
+    //$('#sel2_prior_days').removeClass("none");
+    //$('#sel2_prior_days').addClass("showDIV");
+
+    //$('#icom_prior_days').removeClass("none");
+    //$('#icom_prior_days').addClass("showDIV");
+
+    //$('#qc_prior_days').removeClass("none");
+    //$('#qc_prior_days').addClass("showDIV");
+
+    //$('#pre_prior_days').removeClass("none");
+    //$('#pre_prior_days').addClass("showDIV");
+
+    //$('#fre_prior_days').removeClass("none");
+    //$('#fre_prior_days').addClass("showDIV");
+
+    //$('#ann_prior_days').removeClass("none");
+    //$('#ann_prior_days').addClass("showDIV");
+
+    //$('#cl_prior_days').removeClass("none");
+    //$('#cl_prior_days').addClass("showDIV");
+
+    //$('#cal_ag_prior_days').removeClass("none");
+    //$('#cal_ag_prior_days').addClass("showDIV");
+
+    //$('#sel2_prior_days_review').removeClass("none");
+    //$('#sel2_prior_days_review').addClass("showDIV");
+
+    //$('#icom_prior_days_review').removeClass("none");
+    //$('#icom_prior_days_review').addClass("showDIV");
+
+    //$('#qc_prior_days_review').removeClass("none");
+    //$('#qc_prior_days_review').addClass("showDIV");
+
+    //$('#fre_prior_days_review').removeClass("none");
+    //$('#fre_prior_days_review').addClass("showDIV");
+
+    //$('#ann_prior_days_review').removeClass("none");
+    //$('#ann_prior_days_review').addClass("showDIV");
+
+    //$('#cl_prior_days_review').removeClass("none");
+    //$('#cl_prior_days_review').addClass("showDIV");
+
+    //$('#cal_ag_prior_days_review').removeClass("none");
+    //$('#cal_ag_prior_days_review').addClass("showDIV");
+	// 16-08-2019
+	
+	if(document.getElementById('selec_Date_Cyc_1').value == 2){
+		$("#sel1_prior_days").removeClass("none");
+		$("#sel1_prior_days").addClass("showDIV");
+		$('#sel1_prior_days').css("display", "block");
+	}
+	else{
+		$("#sel1_prior_days").removeClass("showDIV");
+		$("#sel1_prior_days").addClass("none");
+	}
+	
+	
+	if(document.getElementById('cmp_Date').value == 2){
+		$("#cmp_prior_days").removeClass("none");
+		$("#cmp_prior_days").addClass("showDIV");
+		$('#cmp_prior_days').css("display", "block");
+	}
+	else{
+		$("#cmp_prior_days").removeClass("showDIV");
+		$("#cmp_prior_days").addClass("none");
+	}
+	
+	if(document.getElementById('selec_Date_Cyc_2').value == 7){
+		$("#sel2_prior_days").removeClass("none");
+		$("#sel2_prior_days").addClass("showDIV");
+		$('#sel2_prior_days').css("display", "block");
+	}
+	else{
+		$("#sel2_prior_days").removeClass("showDIV");
+		$("#sel2_prior_days").addClass("none");
+	}
+	
+	if(document.getElementById('ind_Comm_Date').value == 3){
+		$("#icom_prior_days").removeClass("none");
+		$("#icom_prior_days").addClass("showDIV");
+		$('#icom_prior_days').css("display", "block");
+	}
+	else{
+		$("#icom_prior_days").removeClass("showDIV");
+		$("#icom_prior_days").addClass("none");
+	}
+	
+	if(document.getElementById('qc_date').value == 3){
+		$("#qc_prior_days").removeClass("none");
+		$("#qc_prior_days").addClass("showDIV");
+		$('#qc_prior_days').css("display", "block");
+	}
+	else{
+		$("#qc_prior_days").removeClass("showDIV");
+		$("#qc_prior_days").addClass("none");
+	}
+	
+	if(document.getElementById('pre_comm_date').value == 2){
+		$("#pre_prior_days").removeClass("none");
+		$("#pre_prior_days").addClass("showDIV");
+		$('#pre_prior_days').css("display", "block");
+	}
+	else{
+		$("#pre_prior_days").removeClass("showDIV");
+		$("#pre_prior_days").addClass("none");
+	}
+	
+	if(document.getElementById('weights_Share_Freeze').value == 6){
+		$("#fre_prior_days").removeClass("none");
+		$("#fre_prior_days").addClass("showDIV");
+		$('#fre_prior_days').css("display", "block");
+	}
+	else{
+		$("#fre_prior_days").removeClass("showDIV");
+		$("#fre_prior_days").addClass("none");
+	}
+	
+	if(document.getElementById('public_Announcement').value == 3){
+		$("#ann_prior_days").removeClass("none");
+		$("#ann_prior_days").addClass("showDIV");
+		$('#ann_prior_days').css("display", "block");
+	}
+	else{
+		$("#ann_prior_days").removeClass("showDIV");
+		$("#ann_prior_days").addClass("none");
+	}
+	
+	if(document.getElementById('client_Comm').value == 3){
+		$("#cl_prior_days").removeClass("none");
+		$("#cl_prior_days").addClass("showDIV");
+		$('#cl_prior_days').css("display", "block");
+	}
+	else{
+		$("#cl_prior_days").removeClass("showDIV");
+		$("#cl_prior_days").addClass("none");
+	}
+	
+	if(document.getElementById('comm_to_Calc_Agent').value == 2){
+		$("#cal_ag_prior_days").removeClass("none");
+		$("#cal_ag_prior_days").addClass("showDIV");
+		$('#cal_ag_prior_days').css("display", "block");
+	}
+	else{
+		$("#cal_ag_prior_days").removeClass("showDIV");
+		$("#cal_ag_prior_days").addClass("none");
+	}
+	
+
+	//Rebal
+	if(document.getElementById('weights_Share_Freeze_rebal').value == 6){
+		$("#fre_prior_days_rebal").removeClass("none");
+		$("#fre_prior_days_rebal").addClass("showDIV");
+		$('#fre_prior_days_rebal').css("display", "block");
+	}
+	else{
+		$("#fre_prior_days_rebal").removeClass("showDIV");
+		$("#fre_prior_days_rebal").addClass("none");
+	}
+	
+	if(document.getElementById('qc_Date_rebal').value == 3){
+		$("#qc_prior_days_rebal").removeClass("none");
+		$("#qc_prior_days_rebal").addClass("showDIV");
+		$('#qc_prior_days_rebal').css("display", "block");
+	}
+	else{
+		$("#qc_prior_days_rebal").removeClass("showDIV");
+		$("#qc_prior_days_rebal").addClass("none");
+	}
+	
+	if(document.getElementById('public_Announcement_rebal').value == 3){
+		$("#ann_prior_days_rebal").removeClass("none");
+		$("#ann_prior_days_rebal").addClass("showDIV");
+		$('#ann_prior_days_rebal').css("display", "block");
+	}
+	else{
+		$("#ann_prior_days_rebal").removeClass("showDIV");
+		$("#ann_prior_days_rebal").addClass("none");
+	}
+	
+	if(document.getElementById('client_Comm_rebal').value == 3){
+		$("#cl_prior_days_rebal").removeClass("none");
+		$("#cl_prior_days_rebal").addClass("showDIV");
+		$('#cl_prior_days_rebal').css("display", "block");
+	}
+	else{
+		$("#cl_prior_days_rebal").removeClass("showDIV");
+		$("#cl_prior_days_rebal").addClass("none");
+	}
+	
+	if(document.getElementById('comm_to_Calc_Agent_rebal').value == 2){
+		$("#cal_ag_prior_days_rebal").removeClass("none");
+		$("#cal_ag_prior_days_rebal").addClass("showDIV");
+		$('#cal_ag_prior_days_rebal').css("display", "block");
+	}
+	else{
+		$("#cal_ag_prior_days_rebal").removeClass("showDIV");
+		$("#cal_ag_prior_days_rebal").addClass("none");
+	}
+	
+	//Review
+	if(document.getElementById('selec_Date_Cyc_2_review').value == 7){
+		$("#sel2_prior_days_review").removeClass("none");
+		$("#sel2_prior_days_review").addClass("showDIV");
+		$('#sel2_prior_days_review').css("display", "block");
+	}else{
+		$("#sel2_prior_days_review").removeClass("showDIV");
+		$("#sel2_prior_days_review").addClass("none");
+	}
+	/*
+	if(document.getElementById('ind_Comm_Date_review').value == 3){
+		$("#icom_prior_days_review").removeClass("none");
+		$("#icom_prior_days_review").addClass("showDIV");
+		$('#icom_prior_days_review').css("display", "block");
+	}else{
+		$("#icom_prior_days_review").removeClass("showDIV");
+		$("#icom_prior_days_review").addClass("none");
+	}
+	*/
+	if(document.getElementById('ind_qc_date_review').value == 3){
+		$("#qc_prior_days_review").removeClass("none");
+		$("#qc_prior_days_review").addClass("showDIV");
+		$('#qc_prior_days_review').css("display", "block");
+	}else{
+		$("#qc_prior_days_review").removeClass("showDIV");
+		$("#qc_prior_days_review").addClass("none");
+	}
+	
+	if(document.getElementById('weights_Share_Freeze_review').value == 6){
+		$("#fre_prior_days_review").removeClass("none");
+		$("#fre_prior_days_review").addClass("showDIV");
+		$('#fre_prior_days_review').css("display", "block");
+	}else{
+		$("#fre_prior_days_review").removeClass("showDIV");
+		$("#fre_prior_days_review").addClass("none");
+	}
+	
+	if(document.getElementById('public_Announcement_review').value == 3){
+		$("#ann_prior_days_review").removeClass("none");
+		$("#ann_prior_days_review").addClass("showDIV");
+		$('#ann_prior_days_review').css("display", "block");
+	}else{
+		$("#ann_prior_days_review").removeClass("showDIV");
+		$("#ann_prior_days_review").addClass("none");
+	}
+	
+	if(document.getElementById('client_Comm_review').value == 3){
+		$("#cl_prior_days_review").removeClass("none");
+		$("#cl_prior_days_review").addClass("showDIV");
+		$('#cl_prior_days_review').css("display", "block");
+	}else{
+		$("#cl_prior_days_review").removeClass("showDIV");
+		$("#cl_prior_days_review").addClass("none");
+	}
+	
+	if(document.getElementById('comm_to_Calc_Agent_review').value == 2){
+		$("#cal_ag_prior_days_review").removeClass("none");
+		$("#cal_ag_prior_days_review").addClass("showDIV");
+		$('#cal_ag_prior_days_review').css("display", "block");
+	}else{
+		$("#cal_ag_prior_days_review").removeClass("showDIV");
+		$("#cal_ag_prior_days_review").addClass("none");
+		
+	}
+	
+	
+	
+
+}
+
+function showDates()
+{
+
+	$("#selec_Date_Cyc_1").removeClass("showDIV");
+	$("#selec_Date_Cyc_1").addClass("none");
+	/*
+	$("#dd12").removeClass("showDIV");
+	$("#dd12").addClass("none");
+	
+	$("#dd22").removeClass("showDIV");
+	$("#dd22").addClass("none");
+	
+	$("#dd32").removeClass("showDIV");
+	$("#dd32").addClass("none");
+	*/
+	//Make sure showDates is not visible
+	$("#mnl_sel1_date").removeClass("none");
+	$("#mnl_sel1_date").addClass("showDIV");
+
+	$('#fre_prior_days_rebal').removeClass("showDIV");
+    $('#fre_prior_days_rebal').addClass("none");
+	$('#fre_prior_days_rebal').css("display", "none");
+
+    $('#qc_prior_days_rebal').removeClass("showDIV");
+    $('#qc_prior_days_rebal').addClass("none");
+	$('#qc_prior_days_rebal').css("display", "none");
+
+    $('#ann_prior_days_rebal').removeClass("showDIV");
+    $('#ann_prior_days_rebal').addClass("none");
+	$('#ann_prior_days_rebal').css("display", "none");
+
+    $('#cl_prior_days_rebal').removeClass("showDIV");
+    $('#cl_prior_days_rebal').addClass("none");
+	$('#cl_prior_days_rebal').css("display", "none");
+
+    $('#cal_ag_prior_days_rebal').removeClass("showDIV");
+    $('#cal_ag_prior_days_rebal').addClass("none");
+	$('#cal_ag_prior_days_rebal').css("display", "none");
+
+    $('#cmp_prior_days').removeClass("showDIV");
+    $('#cmp_prior_days').addClass("none");
+	$('#cmp_prior_days').css("display", "none");
+
+    $('#sel1_prior_days').removeClass("showDIV");
+    $('#sel1_prior_days').addClass("none");
+	$('#sel1_prior_days').css("display", "none");
+
+    $('#sel2_prior_days').removeClass("showDIV");
+    $('#sel2_prior_days').addClass("none");
+	$('#sel2_prior_days').css("display", "none");
+
+    $('#icom_prior_days').removeClass("showDIV");
+    $('#icom_prior_days').addClass("none");
+	$('#icom_prior_days').css("display", "none");
+
+    $('#qc_prior_days').removeClass("showDIV");
+    $('#qc_prior_days').addClass("none");
+	$('#qc_prior_days').css("display", "none");
+
+    $('#pre_prior_days').removeClass("showDIV");
+    $('#pre_prior_days').addClass("none");
+	$('#pre_prior_days').css("display", "none");
+
+    $('#fre_prior_days').removeClass("showDIV");
+    $('#fre_prior_days').addClass("none");
+	$('#fre_prior_days').css("display", "none");
+
+    $('#ann_prior_days').removeClass("showDIV");
+    $('#ann_prior_days').addClass("none");
+	$('#ann_prior_days').css("display", "none");
+
+    $('#cl_prior_days').removeClass("showDIV");
+    $('#cl_prior_days').addClass("none");
+	$('#cl_prior_days').css("display", "none");
+
+    $('#cal_ag_prior_days').removeClass("showDIV");
+    $('#cal_ag_prior_days').addClass("none");
+	$('#cal_ag_prior_days').css("display", "none");
+
+    $('#sel2_prior_days_review').removeClass("showDIV");
+    $('#sel2_prior_days_review').addClass("none");
+	$('#sel2_prior_days_review').css("display", "none");
+	/*
+    $('#icom_prior_days_review').removeClass("showDIV");
+    $('#icom_prior_days_review').addClass("none");
+	$('#icom_prior_days_review').css("display", "none");
+	*/
+    $('#qc_prior_days_review').removeClass("showDIV");
+    $('#qc_prior_days_review').addClass("none");
+	$('#qc_prior_days_review').css("display", "none");
+
+    $('#fre_prior_days_review').removeClass("showDIV");
+    $('#fre_prior_days_review').addClass("none");
+	$('#fre_prior_days_review').css("display", "none");
+
+    $('#ann_prior_days_review').removeClass("showDIV");
+    $('#ann_prior_days_review').addClass("none");
+	$('#ann_prior_days_review').css("display", "none");
+
+    $('#cl_prior_days_review').removeClass("showDIV");
+    $('#cl_prior_days_review').addClass("none");
+	$('#cl_prior_days_review').css("display", "none");
+
+    $('#cal_ag_prior_days_review').removeClass("showDIV");
+    $('#cal_ag_prior_days_review').addClass("none");
+	$('#cal_ag_prior_days_review').css("display", "none");
+
+	$("#cmp_Date").removeClass("showDIV");
+	$("#cmp_Date").addClass("none");
+
+
+
+	$("#mnl_cmp_date").removeClass("none");
+	$("#mnl_cmp_date").addClass("showDIV");
+
+	$("#effective_date").removeClass("showDIV");
+	$("#effective_date").addClass("none");
+
+	$("#mnl_eff_date").removeClass("none");
+	$("#mnl_eff_date").addClass("showDIV");
+
+    $("#qc_date").removeClass("showDIV");
+    $("#qc_date").addClass("none");
+
+    $("#mnl_qc_date").removeClass("none");
+    $("#mnl_qc_date").addClass("showDIV");
+
+	$("#selec_Date_Cyc_2").removeClass("showDIV");
+	$("#selec_Date_Cyc_2").addClass("none");
+
+	$("#mnl_sel2_date").removeClass("none");
+	$("#mnl_sel2_date").addClass("showDIV");
+
+	$("#ind_Comm_Date").removeClass("showDIV");
+	$("#ind_Comm_Date").addClass("none");
+
+	//$("#mnl_ind_Comm_date").removeClass("none");
+	//$("#mnl_ind_Comm_date").addClass("showDIV");
+
+	$("#pre_comm_date").removeClass("showDIV");
+	$("#pre_comm_date").addClass("none");
+
+	$("#mnl_prelim_date").removeClass("none");
+	$("#mnl_prelim_date").addClass("showDIV");
+
+
+	$("#weights_Share_Freeze").removeClass("showDIV");
+	$("#weights_Share_Freeze").addClass("none");
+
+	$("#mnl_freeze_date").removeClass("none");
+	$("#mnl_freeze_date").addClass("showDIV");
+
+	$("#public_Announcement").removeClass("showDIV");
+	$("#public_Announcement").addClass("none");
+
+	$("#mnl_pb_announce_date").removeClass("none");
+	$("#mnl_pb_announce_date").addClass("showDIV");
+
+	$("#client_Comm").removeClass("showDIV");
+	$("#client_Comm").addClass("none");
+
+	$("#mnl_client_comm_date").removeClass("none");
+	$("#mnl_client_comm_date").addClass("showDIV");
+
+	$("#comm_to_Calc_Agent").removeClass("showDIV");
+	$("#comm_to_Calc_Agent").addClass("none");
+
+	$("#mnl_comm_cal_date").removeClass("none");
+	$("#mnl_comm_cal_date").addClass("showDIV");
+
+	$("#selec_Date_Cyc_1_rebal").removeClass("showDIV");
+	$("#selec_Date_Cyc_1_rebal").addClass("none");
+
+	$("#mnl_sel1_date_rebal").removeClass("none");
+	$("#mnl_sel1_date_rebal").addClass("showDIV");
+	
+	$("#cmp_Date_rebal").removeClass("showDIV");
+	$("#cmp_Date_rebal").addClass("none");
+
+	$("#mnl_cmp_date_rebal").removeClass("none");
+	$("#mnl_cmp_date_rebal").addClass("showDIV");
+
+	$("#effective_date_rebal").removeClass("showDIV");
+	$("#effective_date_rebal").addClass("none");
+
+	$("#mnl_eff_date_rebal").removeClass("none");
+	$("#mnl_eff_date_rebal").addClass("showDIV");
+
+	$("#selec_Date_Cyc_2_rebal").removeClass("showDIV");
+	$("#selec_Date_Cyc_2_rebal").addClass("none");
+
+	$("#mnl_sel2_date_rebal").removeClass("none");
+	$("#mnl_sel2_date_rebal").addClass("showDIV");
+
+	$("#qc_Date_rebal").removeClass("showDIV");
+	$("#qc_Date_rebal").addClass("none");
+
+	$("#mnl_qc_date_rebal").removeClass("none");
+	$("#mnl_qc_date_rebal").addClass("showDIV");
+
+	$("#pre_comm_date_rebal").removeClass("showDIV");
+	$("#pre_comm_date_rebal").addClass("none");
+
+	$("#mnl_prelim_date_rebal").removeClass("none");
+	$("#mnl_prelim_date_rebal").addClass("showDIV");
+
+	$("#weights_Share_Freeze_rebal").removeClass("showDIV");
+	$("#weights_Share_Freeze_rebal").addClass("none");
+
+	$("#mnl_freeze_date_rebal").removeClass("none");
+	$("#mnl_freeze_date_rebal").addClass("noneshowDIV");
+
+	$("#public_Announcement_rebal").removeClass("showDIV");
+	$("#public_Announcement_rebal").addClass("none");
+
+	$("#mnl_pb_announce_date_rebal").removeClass("none");
+	$("#mnl_pb_announce_date_rebal").addClass("showDIV");
+
+	$("#client_Comm_rebal").removeClass("showDIV");
+	$("#client_Comm_rebal").addClass("none");
+
+	$("#mnl_client_comm_date_rebal").removeClass("none");
+	$("#mnl_client_comm_date_rebal").addClass("showDIV");
+
+	$("#comm_to_Calc_Agent_rebal").removeClass("showDIV");
+	$("#comm_to_Calc_Agent_rebal").addClass("none");
+
+	$("#mnl_comm_cal_date_rebal").removeClass("none");
+	$("#mnl_comm_cal_date_rebal").addClass("showDIV");
+
+	$("#selec_Date_Cyc_1_review").removeClass("showDIV");
+	$("#selec_Date_Cyc_1_review").addClass("none");
+
+	$("#mnl_sel1_date_review").removeClass("none");
+	$("#mnl_sel1_date_review").addClass("showDIV");
+
+	$("#cmp_Date_review").removeClass("showDIV");
+	$("#cmp_Date_review").addClass("none");
+
+	$("#mnl_cmp_date_review").removeClass("none");
+	$("#mnl_cmp_date_review").addClass("showDIV");
+
+	$("#effective_date_review").removeClass("showDIV");
+	$("#effective_date_review").addClass("none");
+
+	$("#mnl_eff_date_review").removeClass("none");
+	$("#mnl_eff_date_review").addClass("showDIV");
+
+	$("#selec_Date_Cyc_2_review").removeClass("showDIV");
+	$("#selec_Date_Cyc_2_review").addClass("none");
+
+	$("#mnl_sel2_date_review").removeClass("none");
+	$("#mnl_sel2_date_review").addClass("showDIV");
+
+	$("#ind_Comm_Date_review").removeClass("showDIV");
+	$("#ind_Comm_Date_review").addClass("none");
+	/*
+	$("#mnl_ind_Comm_date_review").removeClass("none");
+	$("#mnl_ind_Comm_date_review").addClass("showDIV");
+	*/
+	$("#pre_comm_date_review").removeClass("showDIV");
+	$("#pre_comm_date_review").addClass("none");
+
+	$("#mnl_prelim_date_review").removeClass("none");
+	$("#mnl_prelim_date_review").addClass("showDIV");
+
+	$("#weights_Share_Freeze_review").removeClass("showDIV");
+	$("#weights_Share_Freeze_review").addClass("none");
+
+	$("#mnl_freeze_date_review").removeClass("none");
+	$("#mnl_freeze_date_review").addClass("showDIV");
+
+	$("#public_Announcement_review").removeClass("showDIV");
+	$("#public_Announcement_review").addClass("none");
+
+	$("#mnl_pb_announce_date_review").removeClass("none");
+	$("#mnl_pb_announce_date_review").addClass("showDIV");
+
+	$("#client_Comm_review").removeClass("showDIV");
+	$("#client_Comm_review").addClass("none");
+
+	$("#mnl_client_comm_date_review").removeClass("none");
+	$("#mnl_client_comm_date_review").addClass("showDIV");
+
+	$("#ind_qc_date_review").removeClass("showDIV");
+	$("#ind_qc_date_review").addClass("none");
+
+	$("#mnl_qc_date_review").removeClass("none");
+	$("#mnl_qc_date_review").addClass("showDIV");
+
+	$("#comm_to_Calc_Agent_review").removeClass("showDIV");
+	$("#comm_to_Calc_Agent_review").addClass("none");
+
+	$("#mnl_comm_cal_date_review").removeClass("none");
+	$("#mnl_comm_cal_date_review").addClass("showDIV");
+	
+	$("#comCalAgent").removeClass("showDIV");
+	$("#comCalAgent").addClass("none");
+	
+	
+}
+
+
+////////////////////////////////   Weight Calculation   ////////////////
+
+function weight_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	//alert(upload_file.value.length);
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+
+function isNumberKey(evt)
+{
+  var charCode = (evt.which) ? evt.which : evt.keyCode;
+  if (charCode != 46 && charCode > 31 
+	&& (charCode < 48 || charCode > 57))
+	 return false;
+
+  return true;
+}
+
+
+function weight_ulag_validation()
+{
+	var flag = 0;
+	var upper_cap = document.getElementById('upper_cap');
+	var lower_cap = document.getElementById('lower_cap');
+	var agg_cap = document.getElementById('agg_cap');
+	var agg_cap_lower = document.getElementById('agg_cap_lower');
+	var upload_file = document.getElementById("upload_file");
+	
+	if(agg_cap.value !='' && agg_cap_lower.value ==''){
+		alert('You must be enter security cap!');
+		flag=1;
+	}
+	if(agg_cap.value =='' && agg_cap_lower.value !=''){
+		alert('You must be enter aggregate value!');
+		flag=1;
+	}
+
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function mlp_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function mlp_sector_validation()
+{
+	var flag = 0;
+	
+	var upload_file = document.getElementById("upload_file");
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function weight_upr_validation()
+{
+	var flag = 0;
+	var upper_cap = document.getElementById('upper_cap');
+	var upload_file = document.getElementById("upload_file");
+	if(upper_cap.value ==''){
+		alert('You must be enter upper cap!');
+		upper_cap.focus()
+		return false
+		flag=1;
+	}
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		lower_cap.focus()
+		return false
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function private_credit_validation()
+{
+	var flag = 0;
+	var upper_cap = document.getElementById('upper_cap');
+	var lower_cap = document.getElementById('lower_cap');
+	var adtv = document.getElementById('adtv');
+	var capitalization = document.getElementById('capitalization');
+	var upload_file = document.getElementById("upload_file");
+
+	if(upper_cap.value ==''){
+		alert('You must be enter upper cap!');
+		upper_cap.focus()
+		return false
+		flag=1;
+	}
+
+	if(lower_cap.value ==''){
+		alert('You must be enter lower cap!');
+		lower_cap.focus()
+		return false
+		flag=1;
+	}
+
+	if(capitalization.value ==''){
+		alert('You must be enter Capitalization!');
+		capitalization.focus()
+		return false
+		flag=1;
+	}
+
+	if(adtv.value ==''){
+		alert('You must be enter ADTV!');
+		adtv.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		lower_cap.focus()
+		return false
+		flag=1;
+	}
+	
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+
+function weight_ul_top_re_secu_validation()
+{
+	var flag = 0;
+	var upper_cap = document.getElementById('upper_cap');
+	var lower_cap = document.getElementById('lower_cap');
+	var top_cap = document.getElementById('top_cap');
+	//var remain_cap = document.getElementById('remain_cap');
+	var securities = document.getElementById('securities');
+	var upload_file = document.getElementById("upload_file");
+	
+	if(upper_cap.value ==''){
+		alert('You must be enter upper cap!');
+		upper_cap.focus()
+		return false
+		flag=1;
+	}
+	if(lower_cap.value ==''){
+		alert('You must be enter lower cap!');
+		lower_cap.focus()
+		return false
+		flag=1;
+	}
+	if(top_cap.value ==''){
+		alert('You must be enter top cap!');
+		top_cap.focus()
+		return false
+		flag=1;
+	}
+	/*
+	if(remain_cap.value ==''){
+		alert('You must be enter remaining cap!');
+		remain_cap.focus()
+		return false
+		flag=1;
+	}
+	*/
+	if(securities.value ==''){
+		alert('You must be enter number of securities!');
+		securities.focus()
+		return false
+		flag=1;
+	}
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function us_sharing_validation()
+{
+	var flag = 0;
+	var pure_weight = document.getElementById('pure_weight');
+	var quasi_marginal = document.getElementById('quasi_marginal');
+	var upload_file = document.getElementById("upload_file");
+	
+	if(pure_weight.value ==''){
+		alert('You must be enter Pure Weight percentage!');
+		pure_weight.focus()
+		return false
+		flag=1;
+	}
+	if(quasi_marginal.value ==''){
+		alert('You must be enter each Quasi Play and Marginal Weight percentage!');
+		quasi_marginal.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function global_space_validation()
+{
+	var flag = 0;
+	var sing_sec_cap_pure_play = document.getElementById('sing_sec_cap_pure_play');
+	var sing_sec_cap_quasi_play = document.getElementById('sing_sec_cap_quasi_play');
+	var quasi_cap = document.getElementById('quasi_cap');
+	var upload_file = document.getElementById("upload_file");
+	
+	if(sing_sec_cap_pure_play.value ==''){
+		alert('You must be enter single security Pure Play cap!');
+		sing_sec_cap_pure_play.focus()
+		return false
+		flag=1;
+	}
+	if(sing_sec_cap_quasi_play.value ==''){
+		alert('You must be enter single security Quasi Play cap!');
+		sing_sec_cap_quasi_play.focus()
+		return false
+		flag=1;
+	}
+	if(quasi_cap.value ==''){
+		alert('You must be enter Quasi Play Aggregate cap!');
+		quasi_cap.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function ai_bigdata_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function blockchain_validation()
+{
+	var flag = 0;
+	var mcap_cap = document.getElementById('mcap_cap');
+	var index_cap = document.getElementById('index_cap');
+	var upload_file = document.getElementById("upload_file");
+	
+	if(mcap_cap.value ==''){
+		alert('You must be enter market cap!');
+		mcap_cap.focus()
+		return false
+		flag=1;
+	}
+	if(index_cap.value ==''){
+		alert('You must be enter index cap!');
+		index_cap.focus()
+		return false
+		flag=1;
+	}
+	
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function global_aerospace_validation()
+{
+	var flag = 0;
+	var capped = document.getElementById('capped');
+	var weight_cap = document.getElementById('weight_cap');
+	var upload_file = document.getElementById("upload_file");
+	
+	if(capped.value ==''){
+		alert('You must be enter Capped!');
+		capped.focus()
+		return false
+		flag=1;
+	}
+	if(weight_cap.value ==''){
+		alert('You must be enter Maximum Weight Cap limit!');
+		weight_cap.focus()
+		return false
+		flag=1;
+	}
+	
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function global_cloud_computing_validation()
+{
+	var flag = 0;
+	var reit_capped = document.getElementById('reit_capped');
+	var security_floor = document.getElementById('security_floor');
+	var reit_sec_cap = document.getElementById('reit_sec_cap');
+	var public_sec_cap = document.getElementById('public_sec_cap');
+	var upload_file = document.getElementById("upload_file");
+	
+	if(reit_capped.value ==''){
+		alert('You must be enter REITs capped!');
+		reit_capped.focus()
+		return false
+		flag=1;
+	}
+	if(security_floor.value ==''){
+		alert('You must be enter Security Floor!');
+		security_floor.focus()
+		return false
+		flag=1;
+	}
+	if(reit_sec_cap.value ==''){
+		alert('You must be enter REITs single security cap!');
+		reit_sec_cap.focus()
+		return false
+		flag=1;
+	}
+	if(public_sec_cap.value ==''){
+		alert('You must be enter public single security cap!');
+		public_sec_cap.focus()
+		return false
+		flag=1;
+	}
+	
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function global_ecomm_validation()
+{
+	var flag = 0;
+	var upper_cap = document.getElementById("upper_cap");
+	var upload_file = document.getElementById("upload_file");
+	
+
+	if(upper_cap.value ==''){
+		alert('You must be enter Upper Cap!');
+		upper_cap.focus()
+		return false
+		flag=1;
+	}
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function global_iot_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function climate_change_validation()
+{
+	var flag = 0;
+	var theme_weight= document.getElementById("theme_weight")
+	var upload_file = document.getElementById("upload_file");
+
+	if(theme_weight.value ==''){
+		alert('You must be enter an Theme Cap!');
+		agg_cap.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function global_wearables_iot_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function north_american_cannabis_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function old_age_nursing_validation()
+{
+	var flag = 0;
+
+	var upload_file = document.getElementById("upload_file");
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function food_tech_validation()
+{
+	var flag = 0;
+
+	var upload_file = document.getElementById("upload_file");
+
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function healthcare_innovation_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function us_industrial_real_estate_logistics_validation()
+{
+	var flag = 0;
+	var pure_weight = document.getElementById('pure_weight');
+	var quasi_marginal = document.getElementById('quasi_marginal');
+	var weight_cap = document.getElementById('weight_cap')
+	var upload_file = document.getElementById("upload_file");
+	
+	if(pure_weight.value ==''){
+		alert('You must be enter Pure Weight percentage!');
+		pure_weight.focus()
+		return false
+		flag=1;
+	}
+	if(quasi_marginal.value ==''){
+		alert('You must be enter each Quasi Play and Marginal Weight percentage!');
+		quasi_marginal.focus()
+		return false
+		flag=1;
+	}
+	if(weight_cap.value==''){
+		alert('You must enter Weight Cap percentage!');
+		weight_cap.focus()
+		return false
+		flag=1;
+	}
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+
+function nextg_thematic_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	var agg_weight =document.getElementById("agg_weight")
+	var mcap_cap =document.getElementById("mcap_cap")
+
+	if(mcap_cap.value==''){
+		alert('You must enter We MCAP Value!');
+		mcap_cap.focus()
+		return false
+		flag=1;
+	}
+	if(agg_weight.value==''){
+		alert('You must enter Aggregate Weight!');
+		agg_weight.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function us_junior_cloud_computing_expo_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	var pure_play =document.getElementById("pure_play")
+	var quasi_play =document.getElementById("quasi_play")
+
+	if(pure_play.value==''){
+		alert('You must enter We MCAP Value!');
+		pure_play.focus()
+		return false
+		flag=1;
+	}
+	if(quasi_play.value==''){
+		alert('You must enter Aggregate Weight!');
+		quasi_play.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+
+function global_junior_cloud_computing_validation()
+{
+	var flag = 0;
+	var pure_play =document.getElementById("pure_play")
+	var quasi_play =document.getElementById("quasi_play")
+	var upload_file = document.getElementById("upload_file");
+
+
+	if(pure_play.value==''){
+		alert('You must enter We Pure Play Value!');
+		pure_play.focus()
+		return false
+		flag=1;
+	}
+	if(quasi_play.value==''){
+		alert('You must enter Quasi Play!');
+		quasi_play.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+
+function us_ecomm_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	var upper_cap = document.getElementById("upper_cap")
+
+	if(upper_cap.value==''){
+		alert('You must enter We Upper Cap Value!');
+		pure_play.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function ecomm_validation()
+{
+	var flag = 0;
+	var single_security_cap = document.getElementById("single_security_cap")
+	var aggregate_sum = document.getElementById("aggregate_sum")
+	var weight_cap = document.getElementById("weight_cap")
+	var above_weight = document.getElementById("above_weight")
+	var upload_file = document.getElementById("upload_file");
+	
+	if(single_security_cap.value==''){
+		alert('You must enter We Single Security Cap Value!');
+		single_security_cap.focus()
+		return false
+		flag=1;
+	}
+
+	if(aggregate_sum.value==''){
+		alert('You must enter We Aggregate Sum!');
+		aggregate_sum.focus()
+		return false
+		flag=1;
+	}
+
+	if(weight_cap.value==''){
+		alert('You must enter We Weight Cap Value!');
+		weight_cap.focus()
+		return false
+		flag=1;
+	}
+
+	if(above_weight.value==''){
+		alert('You must enter We Above Weight Value!');
+		above_weight.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function hylv_preferred_validation()
+{
+	var flag = 0;
+	var issuer_cap= document.getElementById("issueer_cap");
+	var upload_file = document.getElementById("upload_file");
+	
+	if(issuer_cap==''){
+		alert('You Must Enter Issuer Cap Value')
+		issuer_cap.focus();
+		return false;
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function super_dividend_primary_validation()
+{
+	var flag = 0;
+	var fi_weight =document.getElementById("fi_weight")
+	var infra_weight =document.getElementById("infra_weight")
+	var real_weight =document.getElementById("real_weight")
+	var im_weight =document.getElementById("im_weight")
+	var upload_file = document.getElementById("upload_file");
+
+	if(fi_weight.value==''){
+		alert('You must enter We Fixed Income Value!');
+		fi_weight.focus()
+		return false
+		flag=1;
+	}
+
+	if(im_weight.value==''){
+		alert('You must enter We Institutional Managers Value!');
+		im_weight.focus()
+		return false
+		flag=1;
+	}
+
+	if(infra_weight.value==''){
+		alert('You must enter We Infrastucture Value!');
+		infra_weight.focus()
+		return false
+		flag=1;
+	}
+
+	if(real_weight.value==''){
+		alert('You must enter We Real Estate Value!');
+		real_weight.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function super_dividend_secondary_validation()
+{
+	var flag = 0;
+	var start_std = document.getElementById("start_std") 
+	var end_std = document.getElementById("end_std") 
+	var start_cor = document.getElementById("start_cor") 
+	var start_cor = document.getElementById("end_cor") 
+	var upload_file = document.getElementById("upload_file");
+
+	if(start_std.value==''){
+		alert('You must enter Start Position for Standard Deviation!');
+		start_std.focus()
+		return false
+		flag=1;
+	}
+
+	if(end_std.value==''){
+		alert('You must enter End Position for Standard Deviation!');
+		end_std.focus()
+		return false
+		flag=1;
+	}
+
+	if(start_cor.value==''){
+		alert('You must enter Start Position for Correlation!');
+		start_cor.focus()
+		return false
+		flag=1;
+	}
+
+	if(end_cor.value==''){
+		alert('You must enter End Position for Correlation!');
+		end_cor.focus()
+		return false
+		flag=1;
+	}
+
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+
+function global_yieldco_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function yieldco_renewable_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function quality_gold_miners_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function reit_master_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function reit_preferred_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function us_high_beta_low_validation()
+{
+	var flag = 0;
+	var upload_file = document.getElementById("upload_file");
+	
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+function us_poliwogg_validation()
+{
+	var flag = 0;
+	var upper_cap= document.getElementById("upper_cap");
+	var upload_file = document.getElementById("upload_file");
+	if(upper_cap.value==''){
+		alert('You must be enter Upper Cap!');
+		single_sec_cap.focus()
+		return false
+		flag=1;
+	}
+	if(upload_file.value.length < 4) {
+		alert('Must Select any of your csv for calculate weight!');
+		flag=1;
+	}
+	if(flag==0){
+	   document.getElementById("WCForm").submit();
+    }
+}
+
+
+
+function myFunction() {
+  var element = document.getElementById("myDIV");
+  element.classList.toggle("mystyle");
+}
+
+
+
+$(document).ready(function(){
+  $(".dropbtn").click(function(){
+    $(".dropdown-content").toggle();
+  });
+});
+
+
